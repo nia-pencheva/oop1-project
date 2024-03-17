@@ -1,6 +1,8 @@
 package project.star_wars_universe.app;
 
-import project.star_wars_universe.data.DataManager;
+import project.star_wars_universe.data.managers.XMLDataManager;
+import project.star_wars_universe.repository.JediRepository;
+import project.star_wars_universe.repository.PlanetsRepository;
 import project.star_wars_universe.resource.File;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.Scanner;
 public class App {
     private String rawInput = "";
     private List<String> processedInput = new ArrayList<>();
-    private DataManager dataManager = DataManager.getInstance();
+    private XMLDataManager dataManager = XMLDataManager.getInstance();
 
     public void start() throws Exception {
         while(true) {
@@ -54,6 +56,10 @@ public class App {
             case "open":
                 if(enoughArguments(2)) {
                     dataManager.load(new File(processedInput.get(1).replaceAll("\"", "")));
+                    JediRepository jediRepository = JediRepository.getInstance();
+                    jediRepository.printJedi();
+                    PlanetsRepository planetsRepository = PlanetsRepository.getInstance();
+                    planetsRepository.printPlanets();
                 }
                 break;
             case "exit":

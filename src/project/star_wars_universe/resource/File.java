@@ -6,7 +6,7 @@ import project.star_wars_universe.input_output.file.FileReader;
 
 import java.io.IOException;
 
-public class File implements Resource {
+public class File implements Resource<String> {
     private String path;
 
     public File(String path) {
