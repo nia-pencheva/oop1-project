@@ -1,7 +1,7 @@
 package project.star_wars_universe.entities.jedi;
 
-import project.star_wars_universe.entities.jedi.attributes.Rank;
-import project.star_wars_universe.entities.jedi.attributes.SaberColor;
+import project.star_wars_universe.entities.jedi.enums.Rank;
+import project.star_wars_universe.entities.jedi.enums.SaberColor;
 
 public class Jedi {
     private final String name;

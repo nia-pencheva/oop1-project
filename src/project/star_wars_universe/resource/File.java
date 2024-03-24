@@ -6,7 +6,7 @@ import project.star_wars_universe.input_output.file.FileReader;
 
 import java.io.IOException;
 
-public class File implements Resource<String> {
+public class File implements Resource {
     private String path;
 
     public File(String path) {
@@ -19,7 +19,7 @@ public class File implements Resource<String> {
     }
 
     @Override
-    public void update() {
+    public void update(String data) {
 
     }
 }

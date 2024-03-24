@@ -1,12 +1,12 @@
-package project.star_wars_universe.parser.xml;
+package project.star_wars_universe.util.parsers.xml;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import project.star_wars_universe.contracts.parser.Parser;
+import project.star_wars_universe.contracts.util.Parser;
 import project.star_wars_universe.entities.jedi.Jedi;
-import project.star_wars_universe.entities.jedi.attributes.Rank;
-import project.star_wars_universe.entities.jedi.attributes.SaberColor;
+import project.star_wars_universe.entities.jedi.enums.Rank;
+import project.star_wars_universe.entities.jedi.enums.SaberColor;
 
 import java.util.HashSet;
 import java.util.Set;

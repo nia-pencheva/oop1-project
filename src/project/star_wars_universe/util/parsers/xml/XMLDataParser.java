@@ -1,9 +1,9 @@
-package project.star_wars_universe.parser.xml;
+package project.star_wars_universe.util.parsers.xml;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import project.star_wars_universe.contracts.parser.Parser;
+import project.star_wars_universe.contracts.util.Parser;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

@@ -1,4 +1,4 @@
-package project.star_wars_universe.data.loaders;
+package project.star_wars_universe.data.loading.module;
 
 import project.star_wars_universe.contracts.data.DataLoader;
 import project.star_wars_universe.entities.jedi.Jedi;
