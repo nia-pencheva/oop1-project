@@ -4,5 +4,5 @@ import java.io.FileNotFoundException;
 
 public interface Resource {
     String getData() throws Exception;
-    void update(String data);
+    void saveData(String data);
 }

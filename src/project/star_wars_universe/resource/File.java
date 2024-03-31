@@ -19,7 +19,7 @@ public class File implements Resource {
     }
 
     @Override
-    public void update(String data) {
-
+    public void saveData(String data) {
+        return(new FileWriter(path)).write(data);
     }
 }
