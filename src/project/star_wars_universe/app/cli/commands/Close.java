@@ -2,7 +2,7 @@ package project.star_wars_universe.app.cli.commands;
 
 import project.star_wars_universe.app.cli.commands.executability_checkers.NoFileOpenedChecker;
 import project.star_wars_universe.contracts.cli.commands.ExecutablilityChecker;
-import project.star_wars_universe.data.managers.DataManager;
+import project.star_wars_universe.data.AppDataManager;
 
 public class Close extends Command {
     public Close() {
@@ -14,7 +14,7 @@ public class Close extends Command {
         ExecutablilityChecker executablilityChecker = new NoFileOpenedChecker();
 
         if(executablilityChecker.isExecutable()) {
-            DataManager.getInstance().unload();
+            AppDataManager.getInstance().unloadAppData();
         }
         else {
             executablilityChecker.printNotExecutableMessage();

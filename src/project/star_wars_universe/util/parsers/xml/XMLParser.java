@@ -4,6 +4,9 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import project.star_wars_universe.contracts.util.Parser;
+import project.star_wars_universe.data.AppData;
+import project.star_wars_universe.entities.jedi.Jedi;
+import project.star_wars_universe.entities.planets.Planet;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,17 +17,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class XMLDataParser implements Parser<Map<String, Set>, String> {
-    private JediXMLParser jediXMLParser = new JediXMLParser();
-    private PlanetsXMLParser planetsXMLParser = new PlanetsXMLParser();
-
+public class XMLParser implements Parser<String, AppData> {
     @Override
-    public Map<String, Set> parse(String content) throws IOException, SAXException, ParserConfigurationException {
-        Map<String, Set> parsedData = new HashMap<>();
+    public AppData parse(String content) throws IOException, SAXException, ParserConfigurationException {
         Document document = convertStringToDOM(content);
-        parsedData.put("jediList", jediXMLParser.parse(document.getElementsByTagName("jedi-list").item(0).getChildNodes()));
-        parsedData.put("planetsList", planetsXMLParser.parse(document.getElementsByTagName("planets-list").item(0).getChildNodes()));
-        return parsedData;
+        Set<Jedi> jedi = (new JediXMLParser()).parse(document.getElementsByTagName("jedi-list").item(0).getChildNodes());
+        Set<Planet> planets = (new PlanetsXMLParser()).parse(document.getElementsByTagName("planets-list").item(0).getChildNodes());
+
+        return new AppData(jedi, planets);
     }
 
     private Document convertStringToDOM(String content) throws IOException, SAXException, ParserConfigurationException {

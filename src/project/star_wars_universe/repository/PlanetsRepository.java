@@ -22,8 +22,8 @@ public class PlanetsRepository implements Repository<Planet> {
         return instance;
     }
 
-    public List<Planet> getPlanets() {
-        return new ArrayList<Planet>(planets);
+    public Set<Planet> getPlanets() {
+        return new HashSet<Planet>(planets);
     }
 
     @Override
@@ -34,6 +34,11 @@ public class PlanetsRepository implements Repository<Planet> {
     @Override
     public void remove(Planet item) {
         planets.remove(item);
+    }
+
+    @Override
+    public void removeAll() {
+        planets.clear();
     }
 
     public void printPlanets() {

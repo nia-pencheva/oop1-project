@@ -11,7 +11,7 @@ import project.star_wars_universe.entities.jedi.enums.SaberColor;
 import java.util.HashSet;
 import java.util.Set;
 
-public class JediXMLParser implements Parser<Set<Jedi>, NodeList> {
+public class JediXMLParser implements Parser<NodeList, Set<Jedi>> {
 
     @Override
     public Set<Jedi> parse(NodeList content) {

@@ -2,7 +2,8 @@ package project.star_wars_universe.app.cli.commands;
 
 import project.star_wars_universe.app.cli.commands.executability_checkers.NoFileOpenedChecker;
 import project.star_wars_universe.contracts.cli.commands.ExecutablilityChecker;
-import project.star_wars_universe.data.managers.DataManager;
+import project.star_wars_universe.data.AppDataManager;
+import project.star_wars_universe.resource.File;
 
 public class Save extends Command {
 
@@ -15,7 +16,8 @@ public class Save extends Command {
         ExecutablilityChecker executablilityChecker = new NoFileOpenedChecker();
 
         if(executablilityChecker.isExecutable()) {
-            DataManager.getInstance().save
+            File openedFile = AppDataManager.getInstance().getOpenedFile();
+            AppDataManager.getInstance().saveAppData(openedFile);
         }
         else {
             executablilityChecker.printNotExecutableMessage();

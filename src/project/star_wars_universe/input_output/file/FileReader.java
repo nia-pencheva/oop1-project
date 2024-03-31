@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class FileReader implements Reader<String> {
+public class FileReader implements Reader {
     private String path;
 
     public FileReader(String path) {

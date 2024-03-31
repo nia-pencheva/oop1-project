@@ -22,8 +22,8 @@ public class JediRepository implements Repository<Jedi> {
         return instance;
     }
 
-    public List<Jedi> getJedi() {
-        return new ArrayList<Jedi>(jedi);
+    public Set<Jedi> getJedi() {
+        return new HashSet<Jedi>(jedi);
     }
 
     @Override
@@ -34,6 +34,11 @@ public class JediRepository implements Repository<Jedi> {
     @Override
     public void remove(Jedi item) {
         jedi.remove(item);
+    }
+
+    @Override
+    public void removeAll() {
+        jedi.clear();
     }
 
     public void printJedi() {

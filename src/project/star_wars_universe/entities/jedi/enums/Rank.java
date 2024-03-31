@@ -16,7 +16,8 @@ public enum Rank {
         this.rank = rank;
     }
 
-    public String getRank() {
+    @Override
+    public String toString() {
         return rank;
     }
 

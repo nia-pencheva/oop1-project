@@ -1,13 +1,13 @@
 package project.star_wars_universe.app.cli.commands.executability_checkers;
 
 import project.star_wars_universe.contracts.cli.commands.ExecutablilityChecker;
-import project.star_wars_universe.data.managers.DataManager;
+import project.star_wars_universe.data.AppDataManager;
 
 public class FileOpenedChecker implements ExecutablilityChecker {
 
     @Override
     public boolean isExecutable() {
-        return DataManager.getInstance().getResource() == null;
+        return AppDataManager.getInstance().getOpenedFile() == null;
     }
 
     @Override

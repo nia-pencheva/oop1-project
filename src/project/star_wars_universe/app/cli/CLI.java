@@ -1,7 +1,6 @@
 package project.star_wars_universe.app.cli;
 
 import project.star_wars_universe.app.cli.commands.*;
-import project.star_wars_universe.data.managers.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +58,8 @@ public class CLI {
             case "save":
                 (new Save()).execute();
                 break;
+            case "saveas":
+                (new SaveAs(processedInput)).execute();
             case "close":
                 (new Close()).execute();
                 break;

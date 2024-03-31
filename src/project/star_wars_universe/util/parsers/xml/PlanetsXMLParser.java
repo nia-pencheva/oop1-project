@@ -9,7 +9,7 @@ import project.star_wars_universe.entities.planets.Planet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PlanetsXMLParser implements Parser<Set<Planet>, NodeList> {
+public class PlanetsXMLParser implements Parser<NodeList, Set<Planet>> {
     @Override
     public Set<Planet> parse(NodeList content) {
         Set<Planet> planetsSet = new HashSet<>();

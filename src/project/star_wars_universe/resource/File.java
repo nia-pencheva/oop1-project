@@ -1,25 +1,31 @@
 package project.star_wars_universe.resource;
 
-import project.star_wars_universe.contracts.resource.Resource;
+import project.star_wars_universe.contracts.util.Parser;
+import project.star_wars_universe.contracts.util.Serializer;
+import project.star_wars_universe.data.AppData;
 import project.star_wars_universe.input_output.file.FileReader;
-
+import project.star_wars_universe.input_output.file.FileWriter;
 
 import java.io.IOException;
 
-public class File implements Resource {
+public abstract class File {
     private String path;
+    private Parser parser;
+    private Serializer serializer;
 
     public File(String path) {
         this.path = path;
     }
 
-    @Override
     public String getData() throws IOException {
         return (new FileReader(path)).read();
     }
 
-    @Override
-    public void saveData(String data) {
-        return(new FileWriter(path)).write(data);
+    public void saveData(String data) throws IOException {
+        (new FileWriter(path)).write(data);
     }
+
+    public abstract Parser<String, AppData> getParser();
+
+    public abstract Serializer<AppData, String> getSerializer();
 }
