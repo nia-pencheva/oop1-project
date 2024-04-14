@@ -1,6 +1,12 @@
 package project.star_wars_universe.app.cli;
 
-import project.star_wars_universe.app.cli.commands.*;
+import project.star_wars_universe.app.cli.commands.file.Close;
+import project.star_wars_universe.app.cli.commands.file.Open;
+import project.star_wars_universe.app.cli.commands.file.Save;
+import project.star_wars_universe.app.cli.commands.file.SaveAs;
+import project.star_wars_universe.app.cli.commands.main.AddPlanet;
+import project.star_wars_universe.app.cli.commands.util.Exit;
+import project.star_wars_universe.app.cli.commands.util.Help;
 import project.star_wars_universe.app.cli.exceptions.FileAlreadyOpenedException;
 import project.star_wars_universe.app.cli.exceptions.NoFileOpenedException;
 import project.star_wars_universe.app.cli.exceptions.WrongArgumentsCountException;
@@ -69,6 +75,9 @@ public class CLI {
                     break;
                 case "exit":
                     (new Exit()).execute();
+                    break;
+                case "add_planet":
+                    (new AddPlanet(processedInput)).execute();
                     break;
                 default:
                     wrongCommand();

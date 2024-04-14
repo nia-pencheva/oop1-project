@@ -1,4 +1,6 @@
-package project.star_wars_universe.app.cli.commands;
+package project.star_wars_universe.app.cli.commands.util;
+
+import project.star_wars_universe.app.cli.commands.Command;
 
 public class Exit extends Command {
 
