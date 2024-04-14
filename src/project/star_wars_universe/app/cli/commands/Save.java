@@ -1,26 +1,20 @@
 package project.star_wars_universe.app.cli.commands;
 
-import project.star_wars_universe.app.cli.commands.executability_checkers.NoFileOpenedChecker;
-import project.star_wars_universe.contracts.cli.commands.ExecutablilityChecker;
+import project.star_wars_universe.app.cli.exceptions.NoFileOpenedException;
 import project.star_wars_universe.data.AppDataManager;
-import project.star_wars_universe.resource.File;
 
 public class Save extends Command {
 
-    public Save() {
+    public Save() throws NoFileOpenedException {
         super(1);
+
+        if(AppDataManager.getInstance().getOpenedFile() == null) {
+            throw new NoFileOpenedException();
+        }
     }
 
     @Override
     public void execute() throws Exception {
-        ExecutablilityChecker executablilityChecker = new NoFileOpenedChecker();
-
-        if(executablilityChecker.isExecutable()) {
-            File openedFile = AppDataManager.getInstance().getOpenedFile();
-            AppDataManager.getInstance().saveAppData(openedFile);
-        }
-        else {
-            executablilityChecker.printNotExecutableMessage();
-        }
+        AppDataManager.getInstance().saveAppData(AppDataManager.getInstance().getOpenedFile());
     }
 }

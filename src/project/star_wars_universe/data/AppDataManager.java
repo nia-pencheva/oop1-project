@@ -1,8 +1,6 @@
 package project.star_wars_universe.data;
 
 import project.star_wars_universe.contracts.data.DataLoader;
-import project.star_wars_universe.contracts.util.Parser;
-import project.star_wars_universe.contracts.util.Serializer;
 import project.star_wars_universe.data.loading.JediDataLoader;
 import project.star_wars_universe.data.loading.PlanetsDataLoader;
 import project.star_wars_universe.entities.jedi.Jedi;
@@ -30,10 +28,6 @@ public class AppDataManager {
     }
 
     public void loadAppData(File file) throws Exception {
-        if(this.openedFile != null) {
-            throw new FileOpenedException;
-        }
-
         this.openedFile = file;
         AppData appData = file.getParser().parse(openedFile.getData());
         jediDataLoader.load(appData.getJedi());

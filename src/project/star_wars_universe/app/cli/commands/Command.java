@@ -1,7 +1,5 @@
 package project.star_wars_universe.app.cli.commands;
 
-import project.star_wars_universe.app.cli.CLI;
-
 import java.util.List;
 
 public abstract class Command {
@@ -13,12 +11,7 @@ public abstract class Command {
 
     public abstract void execute() throws Exception;
 
-    protected boolean enoughArguments(List<String> input) {
-        if(input.size() < this.segmentsCount) {
-            System.out.println("Not enough arguments!");
-            CLI.printHelpMessage();
-            return false;
-        }
-        return true;
+    protected boolean hasCorrectArgumentsCount(List<String> input) {
+        return input.size() == this.segmentsCount;
     }
 }

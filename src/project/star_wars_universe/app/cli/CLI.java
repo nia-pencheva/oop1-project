@@ -1,6 +1,9 @@
 package project.star_wars_universe.app.cli;
 
 import project.star_wars_universe.app.cli.commands.*;
+import project.star_wars_universe.app.cli.exceptions.FileAlreadyOpenedException;
+import project.star_wars_universe.app.cli.exceptions.NoFileOpenedException;
+import project.star_wars_universe.app.cli.exceptions.WrongArgumentsCountException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,26 +51,38 @@ public class CLI {
     }
 
     public static void readInput() throws Exception {
-        switch(processedInput.get(0)) {
-            case "help":
-                (new Help()).execute();
-                break;
-            case "open":
-                (new Open(processedInput)).execute();
-                break;
-            case "save":
-                (new Save()).execute();
-                break;
-            case "saveas":
-                (new SaveAs(processedInput)).execute();
-            case "close":
-                (new Close()).execute();
-                break;
-            case "exit":
-                (new Exit()).execute();
-                break;
-            default:
-                wrongCommand();
+        try {
+            switch(processedInput.get(0)) {
+                case "help":
+                    (new Help()).execute();
+                    break;
+                case "open":
+                    (new Open(processedInput)).execute();
+                    break;
+                case "save":
+                    (new Save()).execute();
+                    break;
+                case "saveas":
+                    (new SaveAs(processedInput)).execute();
+                case "close":
+                    (new Close()).execute();
+                    break;
+                case "exit":
+                    (new Exit()).execute();
+                    break;
+                default:
+                    wrongCommand();
+            }
+        }
+        catch(WrongArgumentsCountException ex) {
+            System.out.println(ex.getMessage());
+            printHelpMessage();
+        }
+        catch(FileAlreadyOpenedException ex) {
+            System.out.println(ex.getMessage());
+        }
+        catch(NoFileOpenedException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
