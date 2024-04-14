@@ -1,4 +1,4 @@
-package project.star_wars_universe.app.cli.exceptions;
+package project.star_wars_universe.exceptions.cli;
 
 public class FileAlreadyOpenedException extends Exception {
     public FileAlreadyOpenedException() {

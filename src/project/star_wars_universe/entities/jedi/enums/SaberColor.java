@@ -14,8 +14,7 @@ public enum SaberColor {
         this.color = color;
     }
 
-    @Override
-    public String toString() {
+    public String getColor() {
         return color;
     }
 

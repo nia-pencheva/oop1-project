@@ -2,6 +2,7 @@ package project.star_wars_universe.repository;
 
 import project.star_wars_universe.contracts.repository.Repository;
 import project.star_wars_universe.entities.jedi.Jedi;
+import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,8 +27,16 @@ public class JediRepository implements Repository<Jedi> {
         return new HashSet<Jedi>(jedi);
     }
 
+    public boolean jediExists(Jedi jedi) {
+        return this.jedi.contains(jedi);
+    }
+
     @Override
-    public void add(Jedi item) {
+    public void add(Jedi item) throws JediAlreadyExistsException {
+        if(jedi.contains(item)) {
+            throw new JediAlreadyExistsException();
+        }
+
         jedi.add(item);
     }
 

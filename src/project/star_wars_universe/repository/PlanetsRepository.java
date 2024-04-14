@@ -26,6 +26,16 @@ public class PlanetsRepository implements Repository<Planet> {
         return new HashSet<Planet>(planets);
     }
 
+    public Planet getPlanetByName(String name) {
+        for(Planet planet : planets) {
+            if(planet.getName() == name) {
+                return planet;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public void add(Planet item) {
         planets.add(item);

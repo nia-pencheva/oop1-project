@@ -1,24 +1,29 @@
 package project.star_wars_universe.entities.jedi.enums;
 
 public enum Rank {
-    YOUNGLING("Youngling"),
-    INITIATE("Initiate"),
-    PADAWAN("Padwan"),
-    KNIGHT_ASPIRANT("Knight Aspirant"),
-    KNIGHT("Knight"),
-    MASTER("Master"),
-    BATTLE_MASTER("Battle Master"),
-    GRAND_MASTER("Grand Master");
+    YOUNGLING("youngling", "Youngling"),
+    INITIATE("initiate", "Initiate"),
+    PADAWAN("padwan", "padwan"),
+    KNIGHT_ASPIRANT("knight_aspirant", "Knight Aspirant"),
+    KNIGHT("knight", "Knight"),
+    MASTER("master", "Master"),
+    BATTLE_MASTER("battle_master", "Battle Master"),
+    GRAND_MASTER("grand_master", "Grand Master");
 
     private String rank;
+    private String displayName;
 
-    private Rank(String rank) {
+    private Rank(String rank, String displayName) {
         this.rank = rank;
+        this.displayName = displayName;
     }
 
-    @Override
-    public String toString() {
+    public String getRank() {
         return rank;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public static Rank getValue(String rank) {

@@ -28,7 +28,7 @@ public class JediXMLSerializer implements Serializer<Set<Jedi>, Element> {
             jedi.appendChild(name);
 
             rank = document.createElement("rank");
-            rank.appendChild(document.createTextNode(item.getRank().toString()));
+            rank.appendChild(document.createTextNode(item.getRank().getRank()));
             jedi.appendChild(rank);
 
             age = document.createElement("age");
@@ -36,7 +36,7 @@ public class JediXMLSerializer implements Serializer<Set<Jedi>, Element> {
             jedi.appendChild(age);
 
             saberColor = document.createElement("saber-color");
-            saberColor.appendChild(document.createTextNode(item.getSaberColor().toString()));
+            saberColor.appendChild(document.createTextNode(item.getSaberColor().getColor()));
             jedi.appendChild(saberColor);
 
             power = document.createElement("power");

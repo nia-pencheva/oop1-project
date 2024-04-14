@@ -1,8 +1,8 @@
 package project.star_wars_universe.app.cli.commands.main;
 
 import project.star_wars_universe.app.cli.commands.Command;
-import project.star_wars_universe.app.cli.exceptions.NoFileOpenedException;
-import project.star_wars_universe.app.cli.exceptions.WrongArgumentsCountException;
+import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
+import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.entities.planets.Planet;
 import project.star_wars_universe.repository.PlanetsRepository;
@@ -25,6 +25,7 @@ public class AddPlanet extends Command {
 
         this.input = input;
     }
+
     @Override
     public void execute() throws Exception {
         PlanetsRepository.getInstance().add(new Planet(input.get(1)));

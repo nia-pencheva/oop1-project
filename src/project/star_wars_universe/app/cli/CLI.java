@@ -7,9 +7,9 @@ import project.star_wars_universe.app.cli.commands.file.SaveAs;
 import project.star_wars_universe.app.cli.commands.main.AddPlanet;
 import project.star_wars_universe.app.cli.commands.util.Exit;
 import project.star_wars_universe.app.cli.commands.util.Help;
-import project.star_wars_universe.app.cli.exceptions.FileAlreadyOpenedException;
-import project.star_wars_universe.app.cli.exceptions.NoFileOpenedException;
-import project.star_wars_universe.app.cli.exceptions.WrongArgumentsCountException;
+import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
+import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
+import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +78,9 @@ public class CLI {
                     break;
                 case "add_planet":
                     (new AddPlanet(processedInput)).execute();
+                    break;
+                case "create_jedi":
+                    ()
                     break;
                 default:
                     wrongCommand();

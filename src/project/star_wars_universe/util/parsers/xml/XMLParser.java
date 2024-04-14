@@ -7,6 +7,10 @@ import project.star_wars_universe.contracts.util.Parser;
 import project.star_wars_universe.data.AppData;
 import project.star_wars_universe.entities.jedi.Jedi;
 import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.exceptions.jedi.InvalidAgeException;
+import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
+import project.star_wars_universe.exceptions.jedi.InvalidRankException;
+import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,7 +23,7 @@ import java.util.Set;
 
 public class XMLParser implements Parser<String, AppData> {
     @Override
-    public AppData parse(String content) throws IOException, SAXException, ParserConfigurationException {
+    public AppData parse(String content) throws IOException, SAXException, ParserConfigurationException, InvalidAgeException, InvalidRankException, InvalidSaberColorException, InvalidPowerException {
         Document document = convertStringToDOM(content);
         Set<Jedi> jedi = (new JediXMLParser()).parse(document.getElementsByTagName("jedi-list").item(0).getChildNodes());
         Set<Planet> planets = (new PlanetsXMLParser()).parse(document.getElementsByTagName("planets-list").item(0).getChildNodes());
