@@ -16,8 +16,12 @@ public class Jedi {
     private SaberColor saberColor;
     private double power;
 
-    public Jedi(String name) {
+    public Jedi(String name, String rank, int age, String saberColor, double power) throws InvalidRankException, InvalidAgeException, InvalidSaberColorException, InvalidPowerException {
         this.name = name;
+        setRank(rank);
+        setAge(age);
+        setSaberColor(saberColor);
+        setPower(power);
     }
 
     public String getName() {

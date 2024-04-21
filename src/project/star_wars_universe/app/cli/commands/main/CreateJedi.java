@@ -6,6 +6,9 @@ import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.entities.jedi.enums.Rank;
+import project.star_wars_universe.exceptions.jedi.*;
+import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
+import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.repository.JediRepository;
 import project.star_wars_universe.repository.PlanetsRepository;
 
@@ -29,21 +32,20 @@ public class CreateJedi extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
-        String planetName = input.get(1);
-        String jediName = input.get(2);
-        String jediRank = input.get(3);
-        String jediAge = input.get(4);
-        String saberColor = input.get(5);
-        String jediPower = input.get(6);
+    public void execute() {
+        try {
+            String planetName = input.get(1);
+            String name = input.get(2);
+            String rank = input.get(3);
+            int age = Integer.valueOf(input.get(4));
+            String saberColor = input.get(5);
+            double power = Double.valueOf(input.get(6));
 
-        Jedi jedi = new Jedi(jediName);
-        jedi.setRank(jediRank);
-        jedi.setAge(Integer.valueOf(jediAge));
-        jedi.setSaberColor(saberColor);
-        jedi.setPower(Double.valueOf(jediPower));
-
-        JediRepository.getInstance().add(jedi);
-        PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(jediName);
+            PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(name);
+            JediRepository.getInstance().add(new Jedi(name, rank, age, saberColor, power));
+        }
+        catch(JediAlreadyExistsException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | PlanetDoesNotExistException | JediExistsOnThisPlanetException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

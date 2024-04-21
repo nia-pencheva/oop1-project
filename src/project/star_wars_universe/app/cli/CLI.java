@@ -5,6 +5,7 @@ import project.star_wars_universe.app.cli.commands.file.Open;
 import project.star_wars_universe.app.cli.commands.file.Save;
 import project.star_wars_universe.app.cli.commands.file.SaveAs;
 import project.star_wars_universe.app.cli.commands.main.AddPlanet;
+import project.star_wars_universe.app.cli.commands.main.CreateJedi;
 import project.star_wars_universe.app.cli.commands.util.Exit;
 import project.star_wars_universe.app.cli.commands.util.Help;
 import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
@@ -38,7 +39,7 @@ public class CLI {
 
         for(int i = 0; i < rawInput.length(); i++) {
             currentCharacter = rawInput.charAt(i);
-            if(currentCharacter == '"' && !inQuotes) {
+            if(currentCharacter == '"') {
                 inQuotes = (inQuotes) ? false : true;
             }
 
@@ -79,6 +80,10 @@ public class CLI {
                 case "add_planet":
                     (new AddPlanet(processedInput)).execute();
                     break;
+                case "create_jedi":
+                    System.out.println(processedInput);
+                    (new CreateJedi(processedInput)).execute();
+                    break;
                 default:
                     wrongCommand();
             }
@@ -86,12 +91,6 @@ public class CLI {
         catch(WrongArgumentsCountException ex) {
             System.out.println(ex.getMessage());
             printHelpMessage();
-        }
-        catch(FileAlreadyOpenedException ex) {
-            System.out.println(ex.getMessage());
-        }
-        catch(NoFileOpenedException ex) {
-            System.out.println(ex.getMessage());
         }
     }
 

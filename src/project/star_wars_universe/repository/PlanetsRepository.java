@@ -3,6 +3,7 @@ package project.star_wars_universe.repository;
 import project.star_wars_universe.contracts.repository.Repository;
 import project.star_wars_universe.entities.planets.Planet;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
+import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,14 +26,14 @@ public class PlanetsRepository implements Repository<Planet> {
         return new HashSet<Planet>(planets);
     }
 
-    public Planet getPlanetByName(String name) {
+    public Planet getPlanetByName(String name) throws PlanetDoesNotExistException {
         for(Planet planet : planets) {
-            if(planet.getName() == name) {
+            if(planet.getName().equals(name)) {
                 return planet;
             }
         }
 
-        return null;
+        throw new PlanetDoesNotExistException();
     }
 
     @Override

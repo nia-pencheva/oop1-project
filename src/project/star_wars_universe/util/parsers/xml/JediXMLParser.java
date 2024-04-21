@@ -21,19 +21,21 @@ public class JediXMLParser implements Parser<NodeList, Set<Jedi>> {
     public Set<Jedi> parse(NodeList content) throws InvalidRankException, InvalidAgeException, InvalidSaberColorException, InvalidPowerException {
         Set<Jedi> jediSet = new HashSet<>();
         Node currentNode = null;
+        String name, rank, saberColor;
+        int age;
+        double power;
 
         for(int i = 0; i < content.getLength(); i++) {
             currentNode = content.item(i);
             if(currentNode.getNodeName().equals("jedi")) {
                 if(currentNode instanceof Element) {
                     Element el = (Element) currentNode;
-                    Jedi jedi = new Jedi(el.getElementsByTagName("name").item(0).getTextContent());
-                    jedi.setRank(el.getElementsByTagName("rank").item(0).getTextContent());
-                    jedi.setAge((Integer.parseInt(el.getElementsByTagName("age").item(0).getTextContent())));
-                    jedi.setSaberColor(el.getElementsByTagName("saber-color").item(0).getTextContent());
-                    jedi.setPower(Double.parseDouble(el.getElementsByTagName("power").item(0).getTextContent()));
-
-                    jediSet.add(jedi);
+                    name = el.getElementsByTagName("name").item(0).getTextContent();
+                    rank = el.getElementsByTagName("rank").item(0).getTextContent();
+                    age = Integer.parseInt(el.getElementsByTagName("age").item(0).getTextContent());
+                    saberColor = el.getElementsByTagName("saber-color").item(0).getTextContent();
+                    power = Double.parseDouble(el.getElementsByTagName("power").item(0).getTextContent());
+                    jediSet.add(new Jedi(name, rank, age, saberColor, power));
                 }
             }
         }
