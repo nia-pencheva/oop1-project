@@ -2,10 +2,9 @@ package project.star_wars_universe.repository;
 
 import project.star_wars_universe.contracts.repository.Repository;
 import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class PlanetsRepository implements Repository<Planet> {
@@ -37,7 +36,10 @@ public class PlanetsRepository implements Repository<Planet> {
     }
 
     @Override
-    public void add(Planet item) {
+    public void add(Planet item) throws PlanetAlreadyExistsException {
+        if(planets.contains(item)) {
+            throw new PlanetAlreadyExistsException();
+        }
         planets.add(item);
     }
 

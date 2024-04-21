@@ -11,19 +11,18 @@ import project.star_wars_universe.exceptions.jedi.InvalidAgeException;
 import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
 import project.star_wars_universe.exceptions.jedi.InvalidRankException;
 import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
+import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class XMLParser implements Parser<String, AppData> {
     @Override
-    public AppData parse(String content) throws IOException, SAXException, ParserConfigurationException, InvalidAgeException, InvalidRankException, InvalidSaberColorException, InvalidPowerException {
+    public AppData parse(String content) throws IOException, SAXException, ParserConfigurationException, InvalidAgeException, InvalidRankException, InvalidSaberColorException, InvalidPowerException, JediExistsOnThisPlanetException {
         Document document = convertStringToDOM(content);
         Set<Jedi> jedi = (new JediXMLParser()).parse(document.getElementsByTagName("jedi-list").item(0).getChildNodes());
         Set<Planet> planets = (new PlanetsXMLParser()).parse(document.getElementsByTagName("planets-list").item(0).getChildNodes());
@@ -32,7 +31,8 @@ public class XMLParser implements Parser<String, AppData> {
     }
 
     private Document convertStringToDOM(String content) throws IOException, SAXException, ParserConfigurationException {
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(new InputSource(new StringReader(content)));
         document.getDocumentElement().normalize();
         return document;

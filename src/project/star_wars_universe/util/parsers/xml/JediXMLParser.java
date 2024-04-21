@@ -32,7 +32,6 @@ public class JediXMLParser implements Parser<NodeList, Set<Jedi>> {
                     jedi.setAge((Integer.parseInt(el.getElementsByTagName("age").item(0).getTextContent())));
                     jedi.setSaberColor(el.getElementsByTagName("saber-color").item(0).getTextContent());
                     jedi.setPower(Double.parseDouble(el.getElementsByTagName("power").item(0).getTextContent()));
-                    jedi.setPlanet(el.getElementsByTagName("planet").item(0).getTextContent());
 
                     jediSet.add(jedi);
                 }

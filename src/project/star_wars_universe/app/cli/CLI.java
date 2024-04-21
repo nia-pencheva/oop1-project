@@ -79,9 +79,6 @@ public class CLI {
                 case "add_planet":
                     (new AddPlanet(processedInput)).execute();
                     break;
-                case "create_jedi":
-                    ()
-                    break;
                 default:
                     wrongCommand();
             }

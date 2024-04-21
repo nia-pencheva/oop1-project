@@ -13,7 +13,7 @@ public class PlanetsXMLSerializer implements Serializer<Set<Planet>, Element> {
 
     @Override
     public Element serialize(Set<Planet> data) throws Exception {
-        Element planet, name;
+        Element planet, name, jediPopulation, jedi;
 
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = builder.newDocument();
@@ -26,6 +26,15 @@ public class PlanetsXMLSerializer implements Serializer<Set<Planet>, Element> {
             name = document.createElement("name");
             name.appendChild(document.createTextNode(item.getName()));
             planet.appendChild(name);
+
+            jediPopulation = document.createElement("jedi-population");
+
+            for(String jediName : item.getJediPopulation()) {
+                jedi = document.createElement("jedi");
+                jedi.appendChild(document.createTextNode(jediName));
+                jediPopulation.appendChild(jedi);
+            }
+            planet.appendChild(jediPopulation);
 
             planetsList.appendChild(planet);
         }

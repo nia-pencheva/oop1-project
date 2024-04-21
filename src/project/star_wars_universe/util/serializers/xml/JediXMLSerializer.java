@@ -13,7 +13,7 @@ public class JediXMLSerializer implements Serializer<Set<Jedi>, Element> {
 
     @Override
     public Element serialize(Set<Jedi> data) throws Exception {
-        Element jedi, name, rank, age, saberColor, power, planet;
+        Element jedi, name, rank, age, saberColor, power;
 
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = builder.newDocument();
@@ -42,10 +42,6 @@ public class JediXMLSerializer implements Serializer<Set<Jedi>, Element> {
             power = document.createElement("power");
             power.appendChild(document.createTextNode(String.valueOf(item.getPower())));
             jedi.appendChild(power);
-
-            planet = document.createElement("planet");
-            planet.appendChild(document.createTextNode(item.getPlanet()));
-            jedi.appendChild(planet);
 
             jediList.appendChild(jedi);
         }

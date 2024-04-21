@@ -44,6 +44,6 @@ public class CreateJedi extends Command {
         jedi.setPower(Double.valueOf(jediPower));
 
         JediRepository.getInstance().add(jedi);
-        PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(jedi);
+        PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(jediName);
     }
 }

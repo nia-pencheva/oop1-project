@@ -1,7 +1,5 @@
 package project.star_wars_universe.entities.planets;
 
-import project.star_wars_universe.entities.jedi.Jedi;
-import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
 import project.star_wars_universe.repository.JediRepository;
 
@@ -10,7 +8,7 @@ import java.util.Set;
 
 public class Planet {
     private final String name;
-    private Set<Jedi> jediPopulation = new HashSet<>();
+    private Set<String> jediPopulation = new HashSet<>();
 
     public Planet(String name) {
         this.name = name;
@@ -20,15 +18,15 @@ public class Planet {
         return name;
     }
 
-    public boolean jediExists(Jedi jedi) {
+    public Set<String> getJediPopulation() {
+        return new HashSet<>(jediPopulation);
+    }
+
+    public boolean jediExists(String jedi) {
         return jediPopulation.contains(jedi);
     }
 
-    public void addJedi(Jedi jedi) throws JediDoesNotExistException, JediExistsOnThisPlanetException {
-        if(!JediRepository.getInstance().jediExists(jedi)) {
-            throw new JediDoesNotExistException();
-        }
-
+    public void addJedi(String jedi) throws JediExistsOnThisPlanetException {
         if(jediExists(jedi)) {
             throw new JediExistsOnThisPlanetException();
         }
@@ -40,6 +38,7 @@ public class Planet {
     public String toString() {
         return "Planet{" +
                 "name='" + name + '\'' +
+                ", jediPopulation=" + jediPopulation +
                 '}';
     }
 }
