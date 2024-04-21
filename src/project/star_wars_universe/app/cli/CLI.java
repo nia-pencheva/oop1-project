@@ -6,6 +6,7 @@ import project.star_wars_universe.app.cli.commands.file.Save;
 import project.star_wars_universe.app.cli.commands.file.SaveAs;
 import project.star_wars_universe.app.cli.commands.main.AddPlanet;
 import project.star_wars_universe.app.cli.commands.main.CreateJedi;
+import project.star_wars_universe.app.cli.commands.main.RemoveJedi;
 import project.star_wars_universe.app.cli.commands.util.Exit;
 import project.star_wars_universe.app.cli.commands.util.Help;
 import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
@@ -41,6 +42,7 @@ public class CLI {
             currentCharacter = rawInput.charAt(i);
             if(currentCharacter == '"') {
                 inQuotes = (inQuotes) ? false : true;
+                continue;
             }
 
             if((currentCharacter == ' ' && !inQuotes)){
@@ -81,8 +83,10 @@ public class CLI {
                     (new AddPlanet(processedInput)).execute();
                     break;
                 case "create_jedi":
-                    System.out.println(processedInput);
                     (new CreateJedi(processedInput)).execute();
+                    break;
+                case "remove_jedi":
+                    (new RemoveJedi(processedInput)).execute();
                     break;
                 default:
                     wrongCommand();
@@ -91,6 +95,9 @@ public class CLI {
         catch(WrongArgumentsCountException ex) {
             System.out.println(ex.getMessage());
             printHelpMessage();
+        }
+        catch(FileAlreadyOpenedException | NoFileOpenedException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 

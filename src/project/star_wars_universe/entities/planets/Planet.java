@@ -1,7 +1,7 @@
 package project.star_wars_universe.entities.planets;
 
+import project.star_wars_universe.exceptions.planets.JediDoesNotExistOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
-import project.star_wars_universe.repository.JediRepository;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -33,6 +33,14 @@ public class Planet {
         }
 
         jediPopulation.add(jedi);
+    }
+
+    public void removeJedi(String jedi) throws JediDoesNotExistOnThisPlanetException {
+        if(!jediExists(jedi)) {
+            throw new JediDoesNotExistOnThisPlanetException();
+        }
+
+        jediPopulation.remove(jedi);
     }
 
     @Override

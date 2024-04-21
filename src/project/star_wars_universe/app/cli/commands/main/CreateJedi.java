@@ -5,7 +5,6 @@ import project.star_wars_universe.entities.jedi.Jedi;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.data.AppDataManager;
-import project.star_wars_universe.entities.jedi.enums.Rank;
 import project.star_wars_universe.exceptions.jedi.*;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
@@ -43,6 +42,7 @@ public class CreateJedi extends Command {
 
             PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(name);
             JediRepository.getInstance().add(new Jedi(name, rank, age, saberColor, power));
+            System.out.println("Jedi " + name + " was successfully created!");
         }
         catch(JediAlreadyExistsException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | PlanetDoesNotExistException | JediExistsOnThisPlanetException ex) {
             System.out.println(ex.getMessage());

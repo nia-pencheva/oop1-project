@@ -27,6 +27,6 @@ public class Open extends Command {
 
     @Override
     public void execute() throws Exception {
-        AppDataManager.getInstance().loadAppData(new XMLFile(input.get(1).replaceAll("\"", "")));
+        AppDataManager.getInstance().loadAppData(new XMLFile(input.get(1)));
     }
 }
