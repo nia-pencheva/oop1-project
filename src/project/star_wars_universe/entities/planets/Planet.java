@@ -4,6 +4,7 @@ import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetExcep
 import project.star_wars_universe.repository.JediRepository;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Planet {
@@ -40,5 +41,18 @@ public class Planet {
                 "name='" + name + '\'' +
                 ", jediPopulation=" + jediPopulation +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Planet planet = (Planet) o;
+        return Objects.equals(getName(), planet.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }

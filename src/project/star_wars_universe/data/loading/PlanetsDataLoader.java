@@ -15,8 +15,6 @@ public class PlanetsDataLoader implements DataLoader<Set<Planet>> {
         for(Planet item : planets) {
             repository.add(item);
         }
-
-        repository.printPlanets();
     }
 
     @Override

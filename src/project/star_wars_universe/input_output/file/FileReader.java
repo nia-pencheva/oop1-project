@@ -22,7 +22,6 @@ public class FileReader implements Reader {
         BufferedReader reader = new BufferedReader(new java.io.FileReader(path));
         StringBuilder builder = new StringBuilder();
         String line = null;
-        System.out.println(this.path);
 
         while((line = reader.readLine()) != null) {
             builder.append(line);

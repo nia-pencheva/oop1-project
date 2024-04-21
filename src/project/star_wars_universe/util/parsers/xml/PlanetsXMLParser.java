@@ -24,7 +24,6 @@ public class PlanetsXMLParser implements Parser<NodeList, Set<Planet>> {
                 if(currentNode instanceof Element) {
                     el = (Element) currentNode;
                     Planet planet = new Planet(el.getElementsByTagName("name").item(0).getTextContent());
-                    System.out.println(el.getElementsByTagName("jedi-population").item(0));
                     NodeList jediPopulation = el.getElementsByTagName("jedi-population").item(0).getChildNodes();
 
                     for(int j = 0; j < jediPopulation.getLength(); j++) {
