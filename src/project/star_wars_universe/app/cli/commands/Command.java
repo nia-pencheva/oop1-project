@@ -9,7 +9,7 @@ public abstract class Command {
         this.segmentsCount = segmentsCount;
     }
 
-    public abstract void execute() throws Exception;
+    public abstract void execute();
 
     protected boolean hasCorrectArgumentsCount(List<String> input) {
         return input.size() == this.segmentsCount;

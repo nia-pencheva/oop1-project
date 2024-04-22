@@ -6,6 +6,7 @@ import project.star_wars_universe.app.cli.commands.file.Save;
 import project.star_wars_universe.app.cli.commands.file.SaveAs;
 import project.star_wars_universe.app.cli.commands.main.AddPlanet;
 import project.star_wars_universe.app.cli.commands.main.CreateJedi;
+import project.star_wars_universe.app.cli.commands.main.Print;
 import project.star_wars_universe.app.cli.commands.main.RemoveJedi;
 import project.star_wars_universe.app.cli.commands.util.Exit;
 import project.star_wars_universe.app.cli.commands.util.Help;
@@ -73,6 +74,7 @@ public class CLI {
                     break;
                 case "saveas":
                     (new SaveAs(processedInput)).execute();
+                    break;
                 case "close":
                     (new Close()).execute();
                     break;
@@ -87,6 +89,9 @@ public class CLI {
                     break;
                 case "remove_jedi":
                     (new RemoveJedi(processedInput)).execute();
+                    break;
+                case "print":
+                    (new Print(processedInput)).execute();
                     break;
                 default:
                     wrongCommand();

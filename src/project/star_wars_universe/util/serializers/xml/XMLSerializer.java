@@ -4,9 +4,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import project.star_wars_universe.contracts.util.Serializer;
 import project.star_wars_universe.data.AppData;
+import project.star_wars_universe.exceptions.util.SerializationFailureException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -17,19 +19,24 @@ import java.io.StringWriter;
 
 public class XMLSerializer implements Serializer<AppData, String> {
     @Override
-    public String serialize(AppData appData) throws Exception {
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = builder.newDocument();
+    public String serialize(AppData appData) throws SerializationFailureException {
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = builder.newDocument();
 
-        Element root = document.createElement("data");
-        Element jediList = (new JediXMLSerializer()).serialize(appData.getJedi());
-        Element planetsList = (new PlanetsXMLSerializer()).serialize(appData.getPlanets());
+            Element root = document.createElement("data");
+            Element jediList = (new JediXMLSerializer()).serialize(appData.getJedi());
+            Element planetsList = (new PlanetsXMLSerializer()).serialize(appData.getPlanets());
 
-        document.appendChild(root);
-        root.appendChild(document.adoptNode(jediList));
-        root.appendChild(document.adoptNode(planetsList));
+            document.appendChild(root);
+            root.appendChild(document.adoptNode(jediList));
+            root.appendChild(document.adoptNode(planetsList));
 
-        return convertDOMtoString(document);
+            return convertDOMtoString(document);
+        }
+        catch(ParserConfigurationException | TransformerException ex) {
+            throw new SerializationFailureException(ex);
+        }
     }
 
     private String convertDOMtoString(Document document) throws TransformerException {

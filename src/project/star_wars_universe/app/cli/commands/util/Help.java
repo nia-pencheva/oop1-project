@@ -9,7 +9,7 @@ public class Help extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         System.out.println("The following commands are supported:");
 
         for(Commands command : Commands.values()) {

@@ -14,7 +14,7 @@ public class Close extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         AppDataManager.getInstance().unloadAppData();
     }
 }

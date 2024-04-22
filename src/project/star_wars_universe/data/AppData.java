@@ -3,22 +3,23 @@ package project.star_wars_universe.data;
 import project.star_wars_universe.entities.jedi.Jedi;
 import project.star_wars_universe.entities.planets.Planet;
 
+import java.util.List;
 import java.util.Set;
 
 public class AppData {
-    private Set<Jedi> jedi;
-    private Set<Planet> planets;
+    private List<Jedi> jedi;
+    private List<Planet> planets;
 
-    public AppData(Set<Jedi> jedi, Set<Planet> planets) {
+    public AppData(List<Jedi> jedi, List<Planet> planets) {
         this.jedi = jedi;
         this.planets = planets;
     }
 
-    public Set<Jedi> getJedi() {
+    public List<Jedi> getJedi() {
         return jedi;
     }
 
-    public Set<Planet> getPlanets() {
+    public List<Planet> getPlanets() {
         return planets;
     }
 }

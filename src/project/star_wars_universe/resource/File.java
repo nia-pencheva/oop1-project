@@ -25,6 +25,10 @@ public abstract class File {
         (new FileWriter(path)).write(data);
     }
 
+    public String getPath() {
+        return path;
+    }
+
     public abstract Parser<String, AppData> getParser();
 
     public abstract Serializer<AppData, String> getSerializer();

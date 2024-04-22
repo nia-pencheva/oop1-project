@@ -2,18 +2,24 @@ package project.star_wars_universe.data.loading;
 
 import project.star_wars_universe.contracts.data.DataLoader;
 import project.star_wars_universe.entities.jedi.Jedi;
+import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
 import project.star_wars_universe.repository.JediRepository;
 
-import java.util.Set;
+import java.util.List;
 
-public class JediDataLoader implements DataLoader<Set<Jedi>> {
+public class JediDataLoader implements DataLoader<List<Jedi>> {
     private JediRepository repository = JediRepository.getInstance();
 
     @Override
-    public void load(Set<Jedi> jedi) throws JediAlreadyExistsException {
-        for(Jedi item : jedi) {
-            repository.add(item);
+    public void load(List<Jedi> jedi) throws DataLoadingException {
+        try {
+            for(Jedi item : jedi) {
+                repository.add(item);
+            }
+        }
+        catch(JediAlreadyExistsException ex) {
+            throw new DataLoadingException(ex);
         }
     }
 

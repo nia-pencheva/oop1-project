@@ -4,12 +4,15 @@ import project.star_wars_universe.app.cli.commands.Command;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.data.AppDataManager;
+import project.star_wars_universe.exceptions.util.SerializationFailureException;
+import project.star_wars_universe.resource.File;
 import project.star_wars_universe.resource.XMLFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SaveAs extends Command {
-    List<String> input;
+    private List<String> input;
 
     public SaveAs(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
         super(2);
@@ -26,7 +29,14 @@ public class SaveAs extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
-        AppDataManager.getInstance().saveAppData(new XMLFile(input.get(1).replaceAll("\"", "")));
+    public void execute() {
+        try {
+            String path = input.get(1);
+            AppDataManager.getInstance().saveAppData(new XMLFile(path));
+            System.out.println("Data was successfully saved to " + path);
+        }
+        catch(SerializationFailureException | IOException ex) {
+            System.out.println("Writing to file was unsuccessful.");
+        }
     }
 }

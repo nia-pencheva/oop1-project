@@ -2,10 +2,12 @@ package project.star_wars_universe.repository;
 
 import project.star_wars_universe.contracts.repository.Repository;
 import project.star_wars_universe.entities.jedi.Jedi;
-import project.star_wars_universe.entities.planets.Planet;
 import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
+import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class JediRepository implements Repository<Jedi> {
@@ -22,18 +24,18 @@ public class JediRepository implements Repository<Jedi> {
         return instance;
     }
 
-    public Set<Jedi> getJedi() {
-        return new HashSet<Jedi>(jedi);
+    public List<Jedi> getJedi() {
+        return new ArrayList<>(jedi);
     }
 
-    public Jedi getJediByName(String name) {
+    public Jedi getJediByName(String name) throws JediDoesNotExistException {
         for(Jedi jedi : jedi) {
-            if(jedi.getName() == name) {
+            if(jedi.getName().equals(name)) {
                 return jedi;
             }
         }
 
-        return null;
+        throw new JediDoesNotExistException();
     }
 
     @Override

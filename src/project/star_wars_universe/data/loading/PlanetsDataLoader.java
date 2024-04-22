@@ -2,18 +2,24 @@ package project.star_wars_universe.data.loading;
 
 import project.star_wars_universe.contracts.data.DataLoader;
 import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 import project.star_wars_universe.repository.PlanetsRepository;
 
-import java.util.Set;
+import java.util.List;
 
-public class PlanetsDataLoader implements DataLoader<Set<Planet>> {
+public class PlanetsDataLoader implements DataLoader<List<Planet>> {
     private PlanetsRepository repository = PlanetsRepository.getInstance();
 
     @Override
-    public void load(Set<Planet> planets) throws PlanetAlreadyExistsException {
-        for(Planet item : planets) {
-            repository.add(item);
+    public void load(List<Planet> planets) throws DataLoadingException {
+        try {
+            for(Planet item : planets) {
+                repository.add(item);
+            }
+        }
+        catch(PlanetAlreadyExistsException ex) {
+            throw new DataLoadingException(ex);
         }
     }
 

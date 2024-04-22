@@ -11,7 +11,7 @@ import project.star_wars_universe.repository.PlanetsRepository;
 import java.util.List;
 
 public class AddPlanet extends Command {
-    List<String> input;
+    private List<String> input;
 
     public AddPlanet(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
         super(2);

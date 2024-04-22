@@ -45,10 +45,18 @@ public class Planet {
 
     @Override
     public String toString() {
-        return "Planet{" +
-                "name='" + name + '\'' +
-                ", jediPopulation=" + jediPopulation +
-                '}';
+        String lineSeparator = System.getProperty("line.separator");
+        StringBuilder builder = new StringBuilder();
+        builder.append("Planet Information:" + lineSeparator);
+        builder.append("-------------------" + lineSeparator);
+        builder.append("Name: " + name + lineSeparator);
+        builder.append("Jedi on this planet:" + lineSeparator);
+
+        for(String jedi : jediPopulation) {
+            builder.append("- " + jedi + lineSeparator);
+        }
+
+        return builder.toString();
     }
 
     @Override

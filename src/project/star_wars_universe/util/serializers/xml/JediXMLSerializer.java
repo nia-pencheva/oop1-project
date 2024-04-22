@@ -4,48 +4,57 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import project.star_wars_universe.contracts.util.Serializer;
 import project.star_wars_universe.entities.jedi.Jedi;
+import project.star_wars_universe.exceptions.util.SerializationFailureException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.util.Set;
+import javax.xml.parsers.ParserConfigurationException;
+import java.util.List;
 
-public class JediXMLSerializer implements Serializer<Set<Jedi>, Element> {
+public class JediXMLSerializer implements Serializer<List<Jedi>, Element> {
 
     @Override
-    public Element serialize(Set<Jedi> data) throws Exception {
-        Element jedi, name, rank, age, saberColor, power;
+    public Element serialize(List<Jedi> data) throws SerializationFailureException {
+        try {
+            Element jedi, name, rank, age, saberColor, power;
 
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = builder.newDocument();
 
-        Element jediList = document.createElement("jedi-list");
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = builder.newDocument();
 
-        for(Jedi item : data) {
-            jedi = document.createElement("jedi");
 
-            name = document.createElement("name");
-            name.appendChild(document.createTextNode(item.getName()));
-            jedi.appendChild(name);
+            Element jediList = document.createElement("jedi-list");
 
-            rank = document.createElement("rank");
-            rank.appendChild(document.createTextNode(item.getRank().getRank()));
-            jedi.appendChild(rank);
+            for(Jedi item : data) {
+                jedi = document.createElement("jedi");
 
-            age = document.createElement("age");
-            age.appendChild(document.createTextNode(String.valueOf(item.getAge())));
-            jedi.appendChild(age);
+                name = document.createElement("name");
+                name.appendChild(document.createTextNode(item.getName()));
+                jedi.appendChild(name);
 
-            saberColor = document.createElement("saber-color");
-            saberColor.appendChild(document.createTextNode(item.getSaberColor().getColor()));
-            jedi.appendChild(saberColor);
+                rank = document.createElement("rank");
+                rank.appendChild(document.createTextNode(item.getRank().getRank()));
+                jedi.appendChild(rank);
 
-            power = document.createElement("power");
-            power.appendChild(document.createTextNode(String.valueOf(item.getPower())));
-            jedi.appendChild(power);
+                age = document.createElement("age");
+                age.appendChild(document.createTextNode(String.valueOf(item.getAge())));
+                jedi.appendChild(age);
 
-            jediList.appendChild(jedi);
+                saberColor = document.createElement("saber-color");
+                saberColor.appendChild(document.createTextNode(item.getSaberColor().getColor()));
+                jedi.appendChild(saberColor);
+
+                power = document.createElement("power");
+                power.appendChild(document.createTextNode(String.valueOf(item.getPower())));
+                jedi.appendChild(power);
+
+                jediList.appendChild(jedi);
+            }
+
+            return jediList;
         }
-
-        return jediList;
+        catch(ParserConfigurationException ex) {
+            throw new SerializationFailureException(ex);
+        }
     }
 }

@@ -5,7 +5,9 @@ import project.star_wars_universe.entities.planets.Planet;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PlanetsRepository implements Repository<Planet> {
@@ -22,8 +24,8 @@ public class PlanetsRepository implements Repository<Planet> {
         return instance;
     }
 
-    public Set<Planet> getPlanets() {
-        return new HashSet<Planet>(planets);
+    public List<Planet> getPlanets() {
+        return new ArrayList<>(planets);
     }
 
     public Planet getPlanetByName(String name) throws PlanetDoesNotExistException {
@@ -34,6 +36,15 @@ public class PlanetsRepository implements Repository<Planet> {
         }
 
         throw new PlanetDoesNotExistException();
+    }
+
+    public Planet getPlanetByJediName(String jedi) {
+        for(Planet planet : planets) {
+            if(planet.getJediPopulation().contains(jedi)) {
+                return planet;
+            }
+        }
+        return null;
     }
 
     @Override

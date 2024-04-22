@@ -14,7 +14,7 @@ import project.star_wars_universe.repository.PlanetsRepository;
 import java.util.List;
 
 public class CreateJedi extends Command {
-    List<String> input;
+    private List<String> input;
 
     public CreateJedi(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
         super(7);

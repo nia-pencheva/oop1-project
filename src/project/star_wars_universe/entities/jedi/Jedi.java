@@ -2,10 +2,9 @@ package project.star_wars_universe.entities.jedi;
 
 import project.star_wars_universe.entities.jedi.enums.Rank;
 import project.star_wars_universe.entities.jedi.enums.SaberColor;
-import project.star_wars_universe.exceptions.jedi.InvalidAgeException;
-import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
-import project.star_wars_universe.exceptions.jedi.InvalidRankException;
-import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
+import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.exceptions.jedi.*;
+import project.star_wars_universe.repository.PlanetsRepository;
 
 import java.util.Objects;
 
@@ -80,15 +79,37 @@ public class Jedi {
         this.power = power;
     }
 
+    public void promoteJedi(double multiplier) throws InvalidPromotionMultiplierException, HighestRankReachedException, InvalidRankException, InvalidPowerException {
+        Rank nextRank = Rank.getRankByOrder(rank.getRankOrder() + 1);
+
+        if(nextRank == null) {
+            throw new HighestRankReachedException();
+        }
+
+        if(multiplier <= 0) {
+            throw new InvalidPromotionMultiplierException();
+        }
+
+        setRank(nextRank.getRank());
+        setPower(power + (power * multiplier));
+    }
+
     @Override
     public String toString() {
-        return "Jedi{" +
-                "name='" + name + '\'' +
-                ", rank=" + rank +
-                ", age=" + age +
-                ", saberColor=" + saberColor +
-                ", power=" + power +
-                '}';
+        String lineSeparator = System.getProperty("line.separator");
+        Planet planet = PlanetsRepository.getInstance().getPlanetByJediName(name);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("Jedi Information: " + lineSeparator);
+        builder.append("-----------------" + lineSeparator);
+        builder.append("Name: " + name + lineSeparator);
+        builder.append("Rank: " + rank.getDisplayName() + lineSeparator);
+        builder.append("Age: " + age + lineSeparator);
+        builder.append("Saber Color: " + saberColor.getColor() + lineSeparator);
+        builder.append("Power: " + power + lineSeparator);
+        builder.append("Planet: " + ((planet != null) ? planet.getName() : "Unknown") + lineSeparator);
+
+        return builder.toString();
     }
 
     @Override

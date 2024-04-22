@@ -5,17 +5,21 @@ import project.star_wars_universe.data.loading.JediDataLoader;
 import project.star_wars_universe.data.loading.PlanetsDataLoader;
 import project.star_wars_universe.entities.jedi.Jedi;
 import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.exceptions.data.DataLoadingException;
+import project.star_wars_universe.exceptions.util.ParsingFailureException;
+import project.star_wars_universe.exceptions.util.SerializationFailureException;
 import project.star_wars_universe.repository.JediRepository;
 import project.star_wars_universe.repository.PlanetsRepository;
 import project.star_wars_universe.resource.File;
 
-import java.util.Set;
+import java.io.IOException;
+import java.util.List;
 
 public class AppDataManager {
     private static AppDataManager instance = null;
     private File openedFile = null;
-    private DataLoader<Set<Jedi>> jediDataLoader = new JediDataLoader();
-    private DataLoader<Set<Planet>> planetsDataLoader = new PlanetsDataLoader();
+    private DataLoader<List<Jedi>> jediDataLoader = new JediDataLoader();
+    private DataLoader<List<Planet>> planetsDataLoader = new PlanetsDataLoader();
 
     private AppDataManager() {}
 
@@ -27,7 +31,7 @@ public class AppDataManager {
         return instance;
     }
 
-    public void loadAppData(File file) throws Exception {
+    public void loadAppData(File file) throws ParsingFailureException, DataLoadingException, IOException {
         this.openedFile = file;
         AppData appData = file.getParser().parse(openedFile.getData());
         jediDataLoader.load(appData.getJedi());
@@ -40,9 +44,9 @@ public class AppDataManager {
         planetsDataLoader.unload();
     }
 
-    public void saveAppData(File file) throws Exception {
-        Set<Jedi> jedi = JediRepository.getInstance().getJedi();
-        Set<Planet> planets = PlanetsRepository.getInstance().getPlanets();
+    public void saveAppData(File file) throws SerializationFailureException, IOException {
+        List<Jedi> jedi = JediRepository.getInstance().getJedi();
+        List<Planet> planets = PlanetsRepository.getInstance().getPlanets();
         AppData appData = new AppData(jedi, planets);
         String data = file.getSerializer().serialize(appData);
         file.saveData(data);
