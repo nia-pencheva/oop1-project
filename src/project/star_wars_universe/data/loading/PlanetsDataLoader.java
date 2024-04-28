@@ -1,7 +1,7 @@
 package project.star_wars_universe.data.loading;
 
 import project.star_wars_universe.contracts.data.DataLoader;
-import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 import project.star_wars_universe.repository.PlanetsRepository;

@@ -1,7 +1,7 @@
 package project.star_wars_universe.app.cli.commands.main;
 
 import project.star_wars_universe.app.cli.commands.Command;
-import project.star_wars_universe.entities.jedi.Jedi;
+import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.data.AppDataManager;
@@ -39,9 +39,10 @@ public class CreateJedi extends Command {
             int age = Integer.valueOf(input.get(4));
             String saberColor = input.get(5);
             double power = Double.valueOf(input.get(6));
+            Jedi newJedi = new Jedi(name, rank, age, saberColor, power);
 
-            PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(name);
-            JediRepository.getInstance().add(new Jedi(name, rank, age, saberColor, power));
+            PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(newJedi);
+            JediRepository.getInstance().add(newJedi);
             System.out.println("Jedi " + name + " was successfully created!");
         }
         catch(JediAlreadyExistsException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | PlanetDoesNotExistException | JediExistsOnThisPlanetException ex) {

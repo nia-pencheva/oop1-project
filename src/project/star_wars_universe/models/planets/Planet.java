@@ -1,7 +1,8 @@
-package project.star_wars_universe.entities.planets;
+package project.star_wars_universe.models.planets;
 
 import project.star_wars_universe.exceptions.planets.JediDoesNotExistOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
+import project.star_wars_universe.models.jedi.Jedi;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Set;
 
 public class Planet {
     private final String name;
-    private Set<String> jediPopulation = new HashSet<>();
+    private Set<Jedi> jediPopulation = new HashSet<>();
 
     public Planet(String name) {
         this.name = name;
@@ -19,15 +20,15 @@ public class Planet {
         return name;
     }
 
-    public Set<String> getJediPopulation() {
+    public Set<Jedi> getJediPopulation() {
         return new HashSet<>(jediPopulation);
     }
 
-    public boolean jediExists(String jedi) {
+    public boolean jediExists(Jedi jedi) {
         return jediPopulation.contains(jedi);
     }
 
-    public void addJedi(String jedi) throws JediExistsOnThisPlanetException {
+    public void addJedi(Jedi jedi) throws JediExistsOnThisPlanetException {
         if(jediExists(jedi)) {
             throw new JediExistsOnThisPlanetException();
         }
@@ -35,7 +36,7 @@ public class Planet {
         jediPopulation.add(jedi);
     }
 
-    public void removeJedi(String jedi) throws JediDoesNotExistOnThisPlanetException {
+    public void removeJedi(Jedi jedi) throws JediDoesNotExistOnThisPlanetException {
         if(!jediExists(jedi)) {
             throw new JediDoesNotExistOnThisPlanetException();
         }
@@ -52,8 +53,8 @@ public class Planet {
         builder.append("Name: " + name + lineSeparator);
         builder.append("Jedi on this planet:" + lineSeparator);
 
-        for(String jedi : jediPopulation) {
-            builder.append("- " + jedi + lineSeparator);
+        for(Jedi jedi : jediPopulation) {
+            builder.append("- " + jedi.getName() + lineSeparator);
         }
 
         return builder.toString();

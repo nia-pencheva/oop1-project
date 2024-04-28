@@ -1,8 +1,8 @@
-package project.star_wars_universe.entities.jedi;
+package project.star_wars_universe.models.jedi;
 
-import project.star_wars_universe.entities.jedi.enums.Rank;
-import project.star_wars_universe.entities.jedi.enums.SaberColor;
-import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.models.jedi.enums.Rank;
+import project.star_wars_universe.models.jedi.enums.SaberColor;
+import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.jedi.*;
 import project.star_wars_universe.repository.PlanetsRepository;
 

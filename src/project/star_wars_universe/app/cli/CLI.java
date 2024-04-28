@@ -4,10 +4,7 @@ import project.star_wars_universe.app.cli.commands.file.Close;
 import project.star_wars_universe.app.cli.commands.file.Open;
 import project.star_wars_universe.app.cli.commands.file.Save;
 import project.star_wars_universe.app.cli.commands.file.SaveAs;
-import project.star_wars_universe.app.cli.commands.main.AddPlanet;
-import project.star_wars_universe.app.cli.commands.main.CreateJedi;
-import project.star_wars_universe.app.cli.commands.main.Print;
-import project.star_wars_universe.app.cli.commands.main.RemoveJedi;
+import project.star_wars_universe.app.cli.commands.main.*;
 import project.star_wars_universe.app.cli.commands.util.Exit;
 import project.star_wars_universe.app.cli.commands.util.Help;
 import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
@@ -89,6 +86,9 @@ public class CLI {
                     break;
                 case "remove_jedi":
                     (new RemoveJedi(processedInput)).execute();
+                    break;
+                case "get_strongest_jedi":
+                    (new GetStrongestJedi(processedInput)).execute();
                     break;
                 case "print":
                     (new Print(processedInput)).execute();

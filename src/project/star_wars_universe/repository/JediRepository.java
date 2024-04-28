@@ -1,7 +1,7 @@
 package project.star_wars_universe.repository;
 
 import project.star_wars_universe.contracts.repository.Repository;
-import project.star_wars_universe.entities.jedi.Jedi;
+import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
 import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 

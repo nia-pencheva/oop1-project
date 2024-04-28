@@ -3,14 +3,14 @@ package project.star_wars_universe.util.serializers.xml;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import project.star_wars_universe.contracts.util.Serializer;
-import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.models.jedi.Jedi;
+import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.util.SerializationFailureException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
-import java.util.Set;
 
 public class PlanetsXMLSerializer implements Serializer<List<Planet>, Element> {
 
@@ -33,9 +33,9 @@ public class PlanetsXMLSerializer implements Serializer<List<Planet>, Element> {
 
                 jediPopulation = document.createElement("jedi-population");
 
-                for(String jediName : item.getJediPopulation()) {
+                for(Jedi jediItem : item.getJediPopulation()) {
                     jedi = document.createElement("jedi");
-                    jedi.appendChild(document.createTextNode(jediName));
+                    jedi.appendChild(document.createTextNode(jediItem.getName()));
                     jediPopulation.appendChild(jedi);
                 }
                 planet.appendChild(jediPopulation);

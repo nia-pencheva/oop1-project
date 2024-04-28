@@ -1,4 +1,4 @@
-package project.star_wars_universe.entities.jedi.enums;
+package project.star_wars_universe.models.jedi.enums;
 
 public enum SaberColor {
     BLUE("blue"),

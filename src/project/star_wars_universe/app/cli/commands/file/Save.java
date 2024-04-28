@@ -4,7 +4,7 @@ import project.star_wars_universe.app.cli.commands.Command;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.util.SerializationFailureException;
-import project.star_wars_universe.resource.File;
+import project.star_wars_universe.resource.file.File;
 
 import java.io.IOException;
 

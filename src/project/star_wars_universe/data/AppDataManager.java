@@ -3,14 +3,14 @@ package project.star_wars_universe.data;
 import project.star_wars_universe.contracts.data.DataLoader;
 import project.star_wars_universe.data.loading.JediDataLoader;
 import project.star_wars_universe.data.loading.PlanetsDataLoader;
-import project.star_wars_universe.entities.jedi.Jedi;
-import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.models.jedi.Jedi;
+import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.exceptions.util.SerializationFailureException;
 import project.star_wars_universe.repository.JediRepository;
 import project.star_wars_universe.repository.PlanetsRepository;
-import project.star_wars_universe.resource.File;
+import project.star_wars_universe.resource.file.File;
 
 import java.io.IOException;
 import java.util.List;

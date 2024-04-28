@@ -4,26 +4,33 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import project.star_wars_universe.contracts.util.Parser;
-import project.star_wars_universe.entities.planets.Planet;
-import project.star_wars_universe.exceptions.jedi.InvalidAgeException;
-import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
-import project.star_wars_universe.exceptions.jedi.InvalidRankException;
-import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
+import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
+import project.star_wars_universe.models.jedi.Jedi;
+import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class PlanetsXMLParser implements Parser<NodeList, List<Planet>> {
+    private Map<String, Jedi> jedi = new HashMap<>();
+
+    public PlanetsXMLParser(List<Jedi> jedi) {
+        for(Jedi item : jedi) {
+            this.jedi.put(item.getName(), item);
+        }
+    }
+
     @Override
     public List<Planet> parse(NodeList content) throws ParsingFailureException {
         try {
             List<Planet> planetsSet = new ArrayList<>();
             Node currentNode = null;
             Element el = null;
+            String jediName;
 
             for(int i = 0; i < content.getLength(); i++) {
                 currentNode = content.item(i);
@@ -38,7 +45,14 @@ public class PlanetsXMLParser implements Parser<NodeList, List<Planet>> {
                             currentNode = jediPopulation.item(j);
 
                             if(currentNode.getNodeName().equals("jedi")) {
-                                planet.addJedi(currentNode.getTextContent());
+                                jediName = currentNode.getTextContent();
+                                if(jedi.containsKey(jediName)) {
+                                    planet.addJedi(jedi.get(jediName));
+                                    jedi.remove(currentNode.getTextContent());
+                                }
+                                else {
+                                    throw new JediDoesNotExistException();
+                                }
                             }
                         }
 
@@ -49,7 +63,7 @@ public class PlanetsXMLParser implements Parser<NodeList, List<Planet>> {
 
             return planetsSet;
         }
-        catch(JediExistsOnThisPlanetException ex) {
+        catch(JediExistsOnThisPlanetException | JediDoesNotExistException ex) {
             throw new ParsingFailureException(ex);
         }
     }

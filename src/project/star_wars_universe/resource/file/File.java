@@ -1,4 +1,4 @@
-package project.star_wars_universe.resource;
+package project.star_wars_universe.resource.file;
 
 import project.star_wars_universe.contracts.util.Parser;
 import project.star_wars_universe.contracts.util.Serializer;

@@ -8,6 +8,7 @@ import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 import project.star_wars_universe.exceptions.planets.JediDoesNotExistOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
+import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.repository.JediRepository;
 import project.star_wars_universe.repository.PlanetsRepository;
 
@@ -36,9 +37,11 @@ public class RemoveJedi extends Command {
             String name = input.get(1);
             String planetName = input.get(2);
 
-            PlanetsRepository.getInstance().getPlanetByName(planetName).removeJedi(name);
             JediRepository repository = JediRepository.getInstance();
-            repository.remove(repository.getJediByName(name));
+            Jedi jedi = repository.getJediByName(name);
+
+            PlanetsRepository.getInstance().getPlanetByName(planetName).removeJedi(jedi);
+            repository.remove(jedi);
             System.out.println("Jedi " + name + " was successfully removed!");
         }
         catch(PlanetDoesNotExistException | JediDoesNotExistOnThisPlanetException | JediDoesNotExistException ex) {

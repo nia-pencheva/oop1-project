@@ -1,6 +1,4 @@
-package project.star_wars_universe.entities.jedi.enums;
-
-import project.star_wars_universe.exceptions.jedi.InvalidRankException;
+package project.star_wars_universe.models.jedi.enums;
 
 public enum Rank {
     YOUNGLING(1, "youngling", "Youngling"),

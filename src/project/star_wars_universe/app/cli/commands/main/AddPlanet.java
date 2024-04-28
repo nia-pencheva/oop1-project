@@ -4,7 +4,7 @@ import project.star_wars_universe.app.cli.commands.Command;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.data.AppDataManager;
-import project.star_wars_universe.entities.planets.Planet;
+import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 import project.star_wars_universe.repository.PlanetsRepository;
 

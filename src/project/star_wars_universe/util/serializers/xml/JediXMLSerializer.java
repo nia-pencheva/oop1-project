@@ -3,7 +3,7 @@ package project.star_wars_universe.util.serializers.xml;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import project.star_wars_universe.contracts.util.Serializer;
-import project.star_wars_universe.entities.jedi.Jedi;
+import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.util.SerializationFailureException;
 
 import javax.xml.parsers.DocumentBuilder;
