@@ -33,9 +33,13 @@ public class AppDataManager {
 
     public void loadAppData(File file) throws ParsingFailureException, DataLoadingException, IOException {
         this.openedFile = file;
-        AppData appData = file.getParser().parse(openedFile.getData());
-        jediDataLoader.load(appData.getJedi());
-        planetsDataLoader.load(appData.getPlanets());
+
+        String content = openedFile.getData();
+        if(!content.isEmpty()) {
+            AppData appData = file.getParser().parse(openedFile.getData());
+            jediDataLoader.load(appData.getJedi());
+            planetsDataLoader.load(appData.getPlanets());
+        }
     }
 
     public void unloadAppData() {

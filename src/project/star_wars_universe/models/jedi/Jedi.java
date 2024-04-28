@@ -15,7 +15,7 @@ public class Jedi {
     private SaberColor saberColor;
     private double power;
 
-    public Jedi(String name, String rank, int age, String saberColor, double power) throws InvalidRankException, InvalidAgeException, InvalidSaberColorException, InvalidPowerException {
+    public Jedi(String name, Rank rank, int age, SaberColor saberColor, double power) throws InvalidRankException, InvalidAgeException, InvalidSaberColorException, InvalidPowerException {
         this.name = name;
         setRank(rank);
         setAge(age);
@@ -31,14 +31,8 @@ public class Jedi {
         return rank;
     }
 
-    public void setRank(String rank) throws InvalidRankException {
-        Rank rankEnumVal = Rank.getValue(rank);
-
-        if(rankEnumVal == null) {
-            throw new InvalidRankException();
-        }
-
-        this.rank = rankEnumVal;
+    public void setRank(Rank rank) {
+        this.rank = rank;
     }
 
     public int getAge() {
@@ -57,14 +51,8 @@ public class Jedi {
         return saberColor;
     }
 
-    public void setSaberColor(String saberColor) throws InvalidSaberColorException {
-        SaberColor saberColorEnumVal = SaberColor.getValue(saberColor);
-
-        if(saberColorEnumVal == null) {
-            throw new InvalidSaberColorException();
-        }
-
-        this.saberColor = saberColorEnumVal;
+    public void setSaberColor(SaberColor saberColor) {
+        this.saberColor = saberColor;
     }
 
     public double getPower() {
@@ -79,19 +67,36 @@ public class Jedi {
         this.power = power;
     }
 
-    public void promoteJedi(double multiplier) throws InvalidPromotionMultiplierException, HighestRankReachedException, InvalidRankException, InvalidPowerException {
-        Rank nextRank = Rank.getRankByOrder(rank.getRankOrder() + 1);
+    public void promoteJedi(double multiplier) throws InvalidPromotionMultiplierException, HighestRankReachedException, InvalidPowerException {
+        try {
+            Rank nextRank = Rank.getRankByOrder(rank.getRankOrder() + 1);
 
-        if(nextRank == null) {
+            if(multiplier <= 0) {
+                throw new InvalidPromotionMultiplierException();
+            }
+
+            setPower(power + (power * multiplier));
+            setRank(nextRank);
+        }
+        catch(InvalidRankException ex) {
             throw new HighestRankReachedException();
         }
+    }
 
-        if(multiplier <= 0) {
-            throw new InvalidPromotionMultiplierException();
+    public void demoteJedi(double multiplier) throws InvalidPromotionMultiplierException, LowestRankReachedException, InvalidPowerException {
+        try {
+            Rank previousRank = Rank.getRankByOrder(rank.getRankOrder() - 1);
+
+            if(multiplier <= 0) {
+                throw new InvalidPromotionMultiplierException();
+            }
+
+            setPower(power - (power * multiplier));
+            setRank(previousRank);
         }
-
-        setRank(nextRank.getRank());
-        setPower(power + (power * multiplier));
+        catch(InvalidRankException ex) {
+            throw new LowestRankReachedException();
+        }
     }
 
     @Override

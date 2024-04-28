@@ -7,6 +7,8 @@ import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.jedi.*;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
+import project.star_wars_universe.models.jedi.enums.Rank;
+import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.repository.JediRepository;
 import project.star_wars_universe.repository.PlanetsRepository;
 
@@ -28,10 +30,10 @@ public class CreateJedi extends Command {
         try {
             String planetName = input.get(1);
             String name = input.get(2);
-            String rank = input.get(3);
-            int age = Integer.valueOf(input.get(4));
-            String saberColor = input.get(5);
-            double power = Double.valueOf(input.get(6));
+            Rank rank = Rank.getValue(input.get(3));
+            int age = Integer.parseInt(input.get(4));
+            SaberColor saberColor = SaberColor.getValue(input.get(5));
+            double power = Double.parseDouble(input.get(6));
             Jedi newJedi = new Jedi(name, rank, age, saberColor, power);
 
             PlanetsRepository.getInstance().getPlanetByName(planetName).addJedi(newJedi);

@@ -9,9 +9,6 @@ import project.star_wars_universe.app.cli.commands.main.*;
 import project.star_wars_universe.app.cli.commands.util.Exit;
 import project.star_wars_universe.app.cli.commands.util.Help;
 import project.star_wars_universe.exceptions.cli.CommandExecutionException;
-import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
-import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
-import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 
 import java.util.*;
 
@@ -41,6 +38,8 @@ public class CLI {
         commands.put("add_planet", new AddPlanet());
         commands.put("create_jedi", new CreateJedi());
         commands.put("remove_jedi", new RemoveJedi());
+        commands.put("promote_jedi", new PromoteJedi());
+        commands.put("demote_jedi", new DemoteJedi());
         commands.put("get_strongest_jedi", new GetStrongestJedi());
         commands.put("get_youngest_jedi", new GetYoungestJedi());
         commands.put("print", new Print());

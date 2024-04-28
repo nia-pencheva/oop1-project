@@ -1,5 +1,7 @@
 package project.star_wars_universe.models.jedi.enums;
 
+import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
+
 public enum SaberColor {
     BLUE("blue"),
     GREEN("green"),
@@ -18,12 +20,13 @@ public enum SaberColor {
         return color;
     }
 
-    public static SaberColor getValue(String color) {
+    public static SaberColor getValue(String color) throws InvalidSaberColorException {
         for(SaberColor e: SaberColor.values()) {
             if(e.color.equals(color)) {
                 return e;
             }
         }
-        return null;
+
+        throw new InvalidSaberColorException();
     }
 }
