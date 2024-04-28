@@ -3,7 +3,6 @@ package project.star_wars_universe.app.cli.commands.main;
 import project.star_wars_universe.app.cli.commands.Command;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
-import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.jedi.*;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
@@ -14,24 +13,18 @@ import project.star_wars_universe.repository.PlanetsRepository;
 import java.util.List;
 
 public class CreateJedi extends Command {
-    private List<String> input;
+    private AppDataManager appDataManager = AppDataManager.getInstance();
 
-    public CreateJedi(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
+    public CreateJedi() {
         super(7);
-
-        if(AppDataManager.getInstance().getOpenedFile() == null) {
-            throw new NoFileOpenedException();
-        }
-
-        if(!hasCorrectArgumentsCount(input)) {
-            throw new WrongArgumentsCountException();
-        }
-
-        this.input = input;
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> input) throws NoFileOpenedException {
+        if(appDataManager.getOpenedFile() == null) {
+            throw new NoFileOpenedException();
+        }
+
         try {
             String planetName = input.get(1);
             String name = input.get(2);

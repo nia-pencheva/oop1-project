@@ -7,19 +7,21 @@ import project.star_wars_universe.exceptions.util.SerializationFailureException;
 import project.star_wars_universe.resource.file.File;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Save extends Command {
+    private AppDataManager appDataManager = AppDataManager.getInstance();
 
-    public Save() throws NoFileOpenedException {
+    public Save() {
         super(1);
-
-        if(AppDataManager.getInstance().getOpenedFile() == null) {
-            throw new NoFileOpenedException();
-        }
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> input) throws NoFileOpenedException {
+        if(appDataManager.getOpenedFile() == null) {
+            throw new NoFileOpenedException();
+        }
+
         try {
             File openedFile = AppDataManager.getInstance().getOpenedFile();
             AppDataManager.getInstance().saveAppData(openedFile);

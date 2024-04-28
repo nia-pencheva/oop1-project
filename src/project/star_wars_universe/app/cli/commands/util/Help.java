@@ -3,15 +3,16 @@ package project.star_wars_universe.app.cli.commands.util;
 import project.star_wars_universe.app.cli.commands.Command;
 import project.star_wars_universe.app.cli.enums.Commands;
 
+import java.util.List;
+
 public class Help extends Command {
     public Help() {
         super(1);
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> input) {
         System.out.println("The following commands are supported:");
-
         for(Commands command : Commands.values()) {
             System.out.println("* " + command.getSyntax());
             System.out.println("\t- " + command.getDescription());

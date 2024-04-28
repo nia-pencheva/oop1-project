@@ -1,5 +1,6 @@
 package project.star_wars_universe.app.cli;
 
+import project.star_wars_universe.app.cli.commands.Command;
 import project.star_wars_universe.app.cli.commands.file.Close;
 import project.star_wars_universe.app.cli.commands.file.Open;
 import project.star_wars_universe.app.cli.commands.file.Save;
@@ -7,25 +8,42 @@ import project.star_wars_universe.app.cli.commands.file.SaveAs;
 import project.star_wars_universe.app.cli.commands.main.*;
 import project.star_wars_universe.app.cli.commands.util.Exit;
 import project.star_wars_universe.app.cli.commands.util.Help;
+import project.star_wars_universe.exceptions.cli.CommandExecutionException;
 import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CLI {
     private static String rawInput = "";
     private static List<String> processedInput = new ArrayList<>();
+    private static Map<String, Command> commands = new HashMap<>();
 
     public static void start() throws Exception {
+        generateCommandsMap();
+
         while(true) {
             Scanner in = new Scanner(System.in);
             rawInput = in.nextLine();
             processInput();
             readInput();
         }
+    }
+
+    private static void generateCommandsMap() {
+        commands.put("help", new Help());
+        commands.put("open", new Open());
+        commands.put("save", new Save());
+        commands.put("saveas", new SaveAs());
+        commands.put("close", new Close());
+        commands.put("exit", new Exit());
+        commands.put("add_planet", new AddPlanet());
+        commands.put("create_jedi", new CreateJedi());
+        commands.put("remove_jedi", new RemoveJedi());
+        commands.put("get_strongest_jedi", new GetStrongestJedi());
+        commands.put("get_youngest_jedi", new GetYoungestJedi());
+        commands.put("print", new Print());
     }
 
     public static void processInput() {
@@ -58,55 +76,28 @@ public class CLI {
     }
 
     public static void readInput() throws Exception {
+        Command command = commands.get(processedInput.get(0));
+
         try {
-            switch(processedInput.get(0)) {
-                case "help":
-                    (new Help()).execute();
-                    break;
-                case "open":
-                    (new Open(processedInput)).execute();
-                    break;
-                case "save":
-                    (new Save()).execute();
-                    break;
-                case "saveas":
-                    (new SaveAs(processedInput)).execute();
-                    break;
-                case "close":
-                    (new Close()).execute();
-                    break;
-                case "exit":
-                    (new Exit()).execute();
-                    break;
-                case "add_planet":
-                    (new AddPlanet(processedInput)).execute();
-                    break;
-                case "create_jedi":
-                    (new CreateJedi(processedInput)).execute();
-                    break;
-                case "remove_jedi":
-                    (new RemoveJedi(processedInput)).execute();
-                    break;
-                case "get_strongest_jedi":
-                    (new GetStrongestJedi(processedInput)).execute();
-                    break;
-                case "print":
-                    (new Print(processedInput)).execute();
-                    break;
-                default:
-                    wrongCommand();
+            if(command != null) {
+                if(command.hasCorrectArgumentsCount(processedInput)) {
+                    command.execute(processedInput);
+                }
+                else {
+                    System.out.println("Wrong arguments count!");
+                    printHelpMessage();
+                }
+            }
+            else {
+                unknownCommand();
             }
         }
-        catch(WrongArgumentsCountException ex) {
-            System.out.println(ex.getMessage());
-            printHelpMessage();
-        }
-        catch(FileAlreadyOpenedException | NoFileOpenedException ex) {
+        catch(CommandExecutionException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public static void wrongCommand() {
+    public static void unknownCommand() {
         System.out.println("No such command!");
         printHelpMessage();
     }

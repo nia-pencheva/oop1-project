@@ -5,7 +5,6 @@ import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
-import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.repository.JediRepository;
@@ -14,25 +13,18 @@ import project.star_wars_universe.repository.PlanetsRepository;
 import java.util.List;
 
 public class Print extends Command {
-    private List<String> input;
+    private AppDataManager appDataManager = AppDataManager.getInstance();
 
-
-    public Print(List<String> input) throws WrongArgumentsCountException, NoFileOpenedException {
+    public Print() {
         super(2);
-
-        if(AppDataManager.getInstance().getOpenedFile() == null) {
-            throw new NoFileOpenedException();
-        }
-
-        if(!hasCorrectArgumentsCount(input)) {
-            throw new WrongArgumentsCountException();
-        }
-
-        this.input = input;
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> input) throws NoFileOpenedException {
+        if(appDataManager.getOpenedFile() == null) {
+            throw new NoFileOpenedException();
+        }
+
         String name = input.get(1);
 
         try {

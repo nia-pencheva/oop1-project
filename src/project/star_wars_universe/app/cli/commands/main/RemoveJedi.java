@@ -1,10 +1,8 @@
 package project.star_wars_universe.app.cli.commands.main;
 
 import project.star_wars_universe.app.cli.commands.Command;
-import project.star_wars_universe.contracts.repository.Repository;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
-import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 import project.star_wars_universe.exceptions.planets.JediDoesNotExistOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
@@ -15,24 +13,18 @@ import project.star_wars_universe.repository.PlanetsRepository;
 import java.util.List;
 
 public class RemoveJedi extends Command {
-    private List<String> input;
+    private AppDataManager appDataManager = AppDataManager.getInstance();
 
-    public RemoveJedi(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
+    public RemoveJedi()  {
         super(3);
-
-        if(AppDataManager.getInstance().getOpenedFile() == null) {
-            throw new NoFileOpenedException();
-        }
-
-        if(!hasCorrectArgumentsCount(input)) {
-            throw new WrongArgumentsCountException();
-        }
-
-        this.input = input;
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> input) throws NoFileOpenedException {
+        if(appDataManager.getOpenedFile() == null) {
+            throw new NoFileOpenedException();
+        }
+
         try {
             String name = input.get(1);
             String planetName = input.get(2);

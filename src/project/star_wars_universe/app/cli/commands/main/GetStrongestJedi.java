@@ -6,31 +6,24 @@ import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
-import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.repository.PlanetsRepository;
 import project.star_wars_universe.services.JediStatisticsService;
 
 import java.util.List;
 
 public class GetStrongestJedi extends Command {
-    private List<String> input;
+    private AppDataManager appDataManager = AppDataManager.getInstance();
 
-    public GetStrongestJedi(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
+    public GetStrongestJedi() {
         super(2);
-
-        if(AppDataManager.getInstance().getOpenedFile() == null) {
-            throw new NoFileOpenedException();
-        }
-
-        if(!hasCorrectArgumentsCount(input)) {
-            throw new WrongArgumentsCountException();
-        }
-
-        this.input = input;
     }
 
     @Override
-    public void execute() {
+    public void execute(List<String> input) throws NoFileOpenedException {
+        if(appDataManager.getOpenedFile() == null) {
+            throw new NoFileOpenedException();
+        }
+
         try {
             String planetName = input.get(1);
             Planet planet = PlanetsRepository.getInstance().getPlanetByName(planetName);
