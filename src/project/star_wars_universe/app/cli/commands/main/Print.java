@@ -1,7 +1,8 @@
 package project.star_wars_universe.app.cli.commands.main;
 
-import project.star_wars_universe.app.cli.commands.Command;
+import project.star_wars_universe.contracts.cli.Command;
 import project.star_wars_universe.data.AppDataManager;
+import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
@@ -12,15 +13,17 @@ import project.star_wars_universe.repository.PlanetsRepository;
 
 import java.util.List;
 
-public class Print extends Command {
+public class Print implements Command {
     private AppDataManager appDataManager = AppDataManager.getInstance();
-
-    public Print() {
-        super(2);
-    }
+    private JediRepository jediRepository = JediRepository.getInstance();
+    private PlanetsRepository planetsRepository = PlanetsRepository.getInstance();
 
     @Override
-    public void execute(List<String> input) throws NoFileOpenedException {
+    public void execute(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
+        if(input.size() != 2) {
+            throw new WrongArgumentsCountException();
+        }
+
         if(appDataManager.getOpenedFile() == null) {
             throw new NoFileOpenedException();
         }
@@ -28,12 +31,12 @@ public class Print extends Command {
         String name = input.get(1);
 
         try {
-            Jedi jedi = JediRepository.getInstance().getJediByName(name);
+            Jedi jedi = jediRepository.getJediByName(name);
             System.out.println(jedi.toString());
         }
         catch(JediDoesNotExistException ex) {
             try {
-                Planet planet = PlanetsRepository.getInstance().getPlanetByName(name);
+                Planet planet = planetsRepository.getPlanetByName(name);
                 System.out.println(planet.toString());
             }
             catch (PlanetDoesNotExistException exception) {

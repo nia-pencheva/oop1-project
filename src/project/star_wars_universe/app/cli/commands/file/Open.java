@@ -1,8 +1,9 @@
 package project.star_wars_universe.app.cli.commands.file;
 
-import project.star_wars_universe.app.cli.commands.Command;
+import project.star_wars_universe.contracts.cli.Command;
 import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
 import project.star_wars_universe.data.AppDataManager;
+import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.resource.file.XMLFile;
@@ -10,22 +11,22 @@ import project.star_wars_universe.resource.file.XMLFile;
 import java.io.IOException;
 import java.util.List;
 
-public class Open extends Command {
+public class Open implements Command {
     AppDataManager appDataManager = AppDataManager.getInstance();
 
-    public Open() {
-        super(2);
-    }
-
     @Override
-    public void execute(List<String> input) throws FileAlreadyOpenedException {
+    public void execute(List<String> input) throws FileAlreadyOpenedException, WrongArgumentsCountException {
+        if(input.size() != 2) {
+            throw new WrongArgumentsCountException();
+        }
+
         if(appDataManager.getOpenedFile() != null) {
             throw new FileAlreadyOpenedException();
         }
 
         try {
             String path = input.get(1);
-            AppDataManager.getInstance().loadAppData(new XMLFile(path));
+            appDataManager.loadAppData(new XMLFile(path));
             System.out.println("File " + path + " was successfully opened");
         }
         catch(ParsingFailureException | DataLoadingException | IOException ex) {

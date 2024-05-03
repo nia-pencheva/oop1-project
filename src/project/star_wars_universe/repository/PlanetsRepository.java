@@ -1,18 +1,18 @@
 package project.star_wars_universe.repository;
 
+import project.star_wars_universe.contracts.observer.planets_repository.PlanetsRepositoryObserver;
+import project.star_wars_universe.contracts.observer.planets_repository.PlanetsRepositorySubject;
 import project.star_wars_universe.contracts.repository.Repository;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class PlanetsRepository implements Repository<Planet> {
+public class PlanetsRepository implements Repository<Planet>, PlanetsRepositorySubject {
     private static PlanetsRepository instance = null;
     private Set<Planet> planets = new HashSet<>();
+    private List<PlanetsRepositoryObserver> observers = new ArrayList<>();
 
     private PlanetsRepository() {}
 
@@ -53,11 +53,13 @@ public class PlanetsRepository implements Repository<Planet> {
             throw new PlanetAlreadyExistsException();
         }
         planets.add(item);
+        notifyPlanetAdded(item);
     }
 
     @Override
     public void remove(Planet item) {
         planets.remove(item);
+        notifyPlanetRemoved(item);
     }
 
     @Override
@@ -65,9 +67,28 @@ public class PlanetsRepository implements Repository<Planet> {
         planets.clear();
     }
 
-    public void printPlanets() {
-        for(Planet planet : this.planets) {
-            System.out.println(planet.toString());
+    @Override
+    public void addObserver(PlanetsRepositoryObserver observer) {
+        System.out.println("Observer added!");
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(PlanetsRepositoryObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyPlanetAdded(Planet planet) {
+        for(PlanetsRepositoryObserver observer : observers) {
+            observer.onPlanetAdded(planet);
+        }
+    }
+
+    @Override
+    public void notifyPlanetRemoved(Planet planet) {
+        for(PlanetsRepositoryObserver observer : observers) {
+            observer.onPlanetRemoved(planet);
         }
     }
 }

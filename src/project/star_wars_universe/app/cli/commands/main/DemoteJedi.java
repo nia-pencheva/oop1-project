@@ -1,26 +1,27 @@
 package project.star_wars_universe.app.cli.commands.main;
 
-import project.star_wars_universe.app.cli.commands.Command;
+import project.star_wars_universe.contracts.cli.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.CommandExecutionException;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
+import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.jedi.*;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.repository.JediRepository;
 
 import java.util.List;
 
-public class DemoteJedi extends Command {
+public class DemoteJedi implements Command {
     private AppDataManager appDataManager = AppDataManager.getInstance();
-
-    public DemoteJedi() {
-        super(3);
-    }
-
+    private JediRepository jediRepository = JediRepository.getInstance();
 
     @Override
     public void execute(List<String> input) throws CommandExecutionException {
-        if(AppDataManager.getInstance().getOpenedFile() == null) {
+        if(input.size() != 3) {
+            throw new WrongArgumentsCountException();
+        }
+
+        if(appDataManager.getOpenedFile() == null) {
             throw new NoFileOpenedException();
         }
 
@@ -28,7 +29,7 @@ public class DemoteJedi extends Command {
         double multiplier = Double.parseDouble(input.get(2));
 
         try {
-            Jedi jedi = JediRepository.getInstance().getJediByName(name);
+            Jedi jedi = jediRepository.getJediByName(name);
 
             jedi.demoteJedi(multiplier);
             System.out.println("Jedi " + name + " has been successfully demoted to rank " + jedi.getRank().getDisplayName());

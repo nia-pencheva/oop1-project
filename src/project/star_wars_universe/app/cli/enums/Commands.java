@@ -1,5 +1,7 @@
 package project.star_wars_universe.app.cli.enums;
 
+import project.star_wars_universe.contracts.cli.Command;
+
 public enum Commands {
     HELP("help", "prints this information"),
     OPEN("open <file>", "opens <file>"),
