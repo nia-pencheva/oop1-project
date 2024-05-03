@@ -102,7 +102,7 @@ public class Jedi {
     @Override
     public String toString() {
         String lineSeparator = System.getProperty("line.separator");
-        Planet planet = PlanetsRepository.getInstance().getPlanetByJediName(name);
+        Planet planet = PlanetsRepository.getInstance().getPlanetByJedi(this);
 
         StringBuilder builder = new StringBuilder();
         builder.append("Jedi Information: " + lineSeparator);
@@ -112,7 +112,7 @@ public class Jedi {
         builder.append("Age: " + age + lineSeparator);
         builder.append("Saber Color: " + saberColor.getColor() + lineSeparator);
         builder.append("Power: " + power + lineSeparator);
-        builder.append("Planet: " + ((planet != null) ? planet.getName() : "Unknown") + lineSeparator);
+        builder.append("Planet: " + ((planet != null) ? planet.getName() : "Unknown"));
 
         return builder.toString();
     }

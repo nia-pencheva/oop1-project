@@ -8,7 +8,7 @@ import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.repository.PlanetsRepository;
-import project.star_wars_universe.services.JediStatisticsService;
+import project.star_wars_universe.controllers.JediController;
 
 import java.util.List;
 
@@ -29,9 +29,9 @@ public class GetStrongestJedi implements Command {
         try {
             String planetName = input.get(1);
             Planet planet = planetsRepository.getPlanetByName(planetName);
-            Jedi strongestJedi = JediStatisticsService.getStrongestJediOnPlanet(planet);
+            Jedi strongestJedi = JediController.getStrongestJediOnPlanet(planet);
             System.out.println("The strongest Jedi on " + planetName + " is:");
-            System.out.println(strongestJedi.toString());
+            System.out.println(strongestJedi);
         }
         catch(PlanetDoesNotExistException ex) {
             System.out.println(ex.getMessage());

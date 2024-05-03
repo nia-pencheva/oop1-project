@@ -3,10 +3,9 @@ package project.star_wars_universe.models.planets;
 import project.star_wars_universe.exceptions.planets.JediDoesNotExistOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
 import project.star_wars_universe.models.jedi.Jedi;
+import project.star_wars_universe.util.comparators.jedi.JediByRankAndName;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Planet {
     private final String name;
@@ -44,6 +43,12 @@ public class Planet {
         jediPopulation.remove(jedi);
     }
 
+    public void sortJediPopulation(Comparator<Jedi> comparator) {
+        Set<Jedi> sortedJedi = new TreeSet<>(comparator);
+        sortedJedi.addAll(jediPopulation);
+        jediPopulation = sortedJedi;
+    }
+
     @Override
     public String toString() {
         String lineSeparator = System.getProperty("line.separator");
@@ -51,10 +56,11 @@ public class Planet {
         builder.append("Planet Information:" + lineSeparator);
         builder.append("-------------------" + lineSeparator);
         builder.append("Name: " + name + lineSeparator);
-        builder.append("Jedi on this planet:" + lineSeparator);
+        builder.append("Jedi on this planet:");
 
         for(Jedi jedi : jediPopulation) {
-            builder.append("- " + jedi.getName() + lineSeparator);
+            builder.append(lineSeparator);
+            builder.append("- " + jedi.getName());
         }
 
         return builder.toString();

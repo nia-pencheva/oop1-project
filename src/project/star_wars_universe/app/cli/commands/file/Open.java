@@ -1,8 +1,8 @@
 package project.star_wars_universe.app.cli.commands.file;
 
 import project.star_wars_universe.contracts.cli.Command;
-import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
 import project.star_wars_universe.data.AppDataManager;
+import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
@@ -39,10 +39,10 @@ public class Open implements Command {
                 System.out.println("Data could not be read" + ((exceptionMessage != null) ? ": " + exceptionMessage : ""));
             }
             else if(ex instanceof IOException) {
-                System.out.println("File could not be read.");
+                System.out.println("File could not be read");
             }
 
-            AppDataManager.getInstance().unloadAppData();
+            appDataManager.unloadAppData();
         }
     }
 }

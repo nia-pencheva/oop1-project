@@ -1,4 +1,4 @@
-package project.star_wars_universe.services;
+package project.star_wars_universe.controllers;
 
 import project.star_wars_universe.exceptions.jedi_statistics.NoGrandMastersOnPlanetException;
 import project.star_wars_universe.exceptions.jedi_statistics.NoJediOfThisRankOnPlanetException;
@@ -9,16 +9,22 @@ import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.util.comparators.jedi.JediByAge;
 import project.star_wars_universe.util.comparators.jedi.JediByName;
+import project.star_wars_universe.util.comparators.jedi.JediByRankAndName;
 import project.star_wars_universe.util.comparators.jedi.JediByStrengthComparator;
 
 import java.util.*;
 
-public class JediStatisticsService {
-    public static List<Jedi> sortJediByName(Set<Jedi> jedi) {
-        List<Jedi> jediList = new ArrayList<Jedi>(jedi);
-        Collections.sort(jediList, new JediByName());
+public class JediController {
+    public static void sortJediByRankAndName(Set<Jedi> jedi) {
+        Set<Jedi> sortedJedi = new TreeSet<>(new JediByRankAndName());
+        sortedJedi.addAll(jedi);
+        jedi = sortedJedi;
+    }
 
-        return jediList;
+    public static void sortJediByName(Set<Jedi> jedi) {
+        Set<Jedi> sortedJedi = new TreeSet<>(new JediByName());
+        sortedJedi.addAll(jedi);
+        jedi = sortedJedi;
     }
 
     public static Jedi getStrongestJediOnPlanet(Planet planet) throws PlanetDoesNotExistException {

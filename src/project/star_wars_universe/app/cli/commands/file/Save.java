@@ -23,13 +23,14 @@ public class Save implements Command {
             throw new NoFileOpenedException();
         }
 
+        File openedFile = appDataManager.getOpenedFile();
+
         try {
-            File openedFile = appDataManager.getOpenedFile();
             appDataManager.saveAppData(openedFile);
             System.out.println("Data was successfully saved to " + openedFile.getPath());
         }
         catch(SerializationFailureException | IOException ex) {
-            System.out.println("Writing to file was unsuccessful.");
+            System.out.println("Saving data to file " + openedFile.getPath() + " was unsuccessful");
         }
     }
 }

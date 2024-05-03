@@ -53,4 +53,6 @@ public enum Rank {
 
         throw new InvalidRankException();
     }
+
+
 }

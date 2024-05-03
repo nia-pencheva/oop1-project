@@ -6,7 +6,11 @@ import project.star_wars_universe.repository.PlanetsRepository;
 
 public class App {
     public void start() throws Exception {
+        initialize();
+        (new CLI()).start();
+    }
+
+    public void initialize() {
         PlanetsRepository.getInstance().addObserver(CommandsList.getInstance());
-        CLI.start();
     }
 }

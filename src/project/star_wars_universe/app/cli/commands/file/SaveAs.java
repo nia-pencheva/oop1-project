@@ -23,13 +23,14 @@ public class SaveAs implements Command {
             throw new NoFileOpenedException();
         }
 
+        String path = input.get(1);
+
         try {
-            String path = input.get(1);
             appDataManager.saveAppData(new XMLFile(path));
             System.out.println("Data was successfully saved to " + path);
         }
         catch(SerializationFailureException | IOException ex) {
-            System.out.println("Writing to file was unsuccessful.");
+            System.out.println("Writing to file " + path + " was unsuccessful.");
         }
     }
 }

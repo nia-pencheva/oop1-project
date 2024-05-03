@@ -5,7 +5,10 @@ import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.CommandExecutionException;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
-import project.star_wars_universe.exceptions.jedi.*;
+import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
+import project.star_wars_universe.exceptions.jedi.LowestRankReachedException;
+import project.star_wars_universe.exceptions.jedi.InvalidPromotionMultiplierException;
+import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.repository.JediRepository;
 
@@ -30,7 +33,6 @@ public class DemoteJedi implements Command {
 
         try {
             Jedi jedi = jediRepository.getJediByName(name);
-
             jedi.demoteJedi(multiplier);
             System.out.println("Jedi " + name + " has been successfully demoted to rank " + jedi.getRank().getDisplayName());
         }

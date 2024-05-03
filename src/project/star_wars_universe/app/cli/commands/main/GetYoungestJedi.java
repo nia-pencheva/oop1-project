@@ -11,13 +11,12 @@ import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.repository.PlanetsRepository;
-import project.star_wars_universe.services.JediStatisticsService;
+import project.star_wars_universe.controllers.JediController;
 
 import java.util.List;
 
 public class GetYoungestJedi implements Command {
     private AppDataManager appDataManager = AppDataManager.getInstance();
-    private PlanetsRepository planetsRepository = PlanetsRepository.getInstance();
 
     @Override
     public void execute(List<String> input) throws NoFileOpenedException, WrongArgumentsCountException {
@@ -35,9 +34,9 @@ public class GetYoungestJedi implements Command {
 
             Planet planet = PlanetsRepository.getInstance().getPlanetByName(planetName);
             Rank rank = Rank.getValue(rankName);
-            Jedi youngestJedi = JediStatisticsService.getYoungestJediOfRankOnPlanet(rank, planet);
+            Jedi youngestJedi = JediController.getYoungestJediOfRankOnPlanet(rank, planet);
             System.out.println("The youngest jedi of rank " + rank.getDisplayName() + " on planet " + planet.getName() + " is: ");
-            System.out.println(youngestJedi.toString());
+            System.out.println(youngestJedi);
         }
         catch(PlanetDoesNotExistException | InvalidRankException | NoJediOfThisRankOnPlanetException ex) {
             System.out.println(ex.getMessage());

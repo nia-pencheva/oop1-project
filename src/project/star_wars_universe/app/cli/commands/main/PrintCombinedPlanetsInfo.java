@@ -4,12 +4,11 @@ import project.star_wars_universe.contracts.cli.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.UnknownCommandException;
-import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.repository.PlanetsRepository;
-import project.star_wars_universe.services.JediStatisticsService;
+import project.star_wars_universe.controllers.JediController;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,9 +39,10 @@ public class PrintCombinedPlanetsInfo implements Command {
             Set<Jedi> combinedJedi = new HashSet<>();
             combinedJedi.addAll(planet1.getJediPopulation());
             combinedJedi.addAll(planet2.getJediPopulation());
+            JediController.sortJediByName(combinedJedi);
 
             System.out.println("The jedi populating " + planet1.getName() + " and " + planet2.getName());
-            for(Jedi jedi : JediStatisticsService.sortJediByName(combinedJedi)) {
+            for(Jedi jedi : combinedJedi) {
                 System.out.println(jedi);
             }
 

@@ -17,7 +17,6 @@ public class Help implements Command {
         for(Commands command : Commands.values()) {
             System.out.println("* " + command.getSyntax());
             System.out.println("\t- " + command.getDescription());
-            System.out.println();
         }
     }
 }

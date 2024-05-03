@@ -1,13 +1,10 @@
 package project.star_wars_universe.app.cli.commands;
 
-import project.star_wars_universe.app.cli.commands.file.Close;
-import project.star_wars_universe.app.cli.commands.file.Open;
-import project.star_wars_universe.app.cli.commands.file.Save;
-import project.star_wars_universe.app.cli.commands.file.SaveAs;
-import project.star_wars_universe.app.cli.commands.main.*;
-import project.star_wars_universe.app.cli.commands.util.Exit;
-import project.star_wars_universe.app.cli.commands.util.Help;
+import project.star_wars_universe.app.cli.commands.main.GetMostUsedSaberColor;
 import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.app.cli.commands.file.*;
+import project.star_wars_universe.app.cli.commands.main.*;
+import project.star_wars_universe.app.cli.commands.util.*;
 import project.star_wars_universe.contracts.observer.planets_repository.PlanetsRepositoryObserver;
 import project.star_wars_universe.exceptions.cli.UnknownCommandException;
 import project.star_wars_universe.models.planets.Planet;
@@ -65,7 +62,6 @@ public class CommandsList implements PlanetsRepositoryObserver {
 
     @Override
     public void onPlanetAdded(Planet planet) {
-        System.out.println(planet);
         addCommand(planet.getName(), new PrintCombinedPlanetsInfo(planet));
     }
 

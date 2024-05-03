@@ -1,6 +1,5 @@
 package project.star_wars_universe.app.cli.commands.main;
 
-import project.star_wars_universe.app.cli.commands.CommandsList;
 import project.star_wars_universe.contracts.cli.Command;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.data.AppDataManager;

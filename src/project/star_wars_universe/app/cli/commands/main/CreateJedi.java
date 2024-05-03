@@ -1,11 +1,15 @@
 package project.star_wars_universe.app.cli.commands.main;
 
 import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
+import project.star_wars_universe.exceptions.jedi.InvalidAgeException;
+import project.star_wars_universe.exceptions.jedi.InvalidRankException;
+import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
+import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
+import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
-import project.star_wars_universe.data.AppDataManager;
-import project.star_wars_universe.exceptions.jedi.*;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.models.jedi.enums.Rank;

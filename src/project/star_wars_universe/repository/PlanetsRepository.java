@@ -3,6 +3,7 @@ package project.star_wars_universe.repository;
 import project.star_wars_universe.contracts.observer.planets_repository.PlanetsRepositoryObserver;
 import project.star_wars_universe.contracts.observer.planets_repository.PlanetsRepositorySubject;
 import project.star_wars_universe.contracts.repository.Repository;
+import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
@@ -38,7 +39,7 @@ public class PlanetsRepository implements Repository<Planet>, PlanetsRepositoryS
         throw new PlanetDoesNotExistException();
     }
 
-    public Planet getPlanetByJediName(String jedi) {
+    public Planet getPlanetByJedi(Jedi jedi) {
         for(Planet planet : planets) {
             if(planet.getJediPopulation().contains(jedi)) {
                 return planet;
@@ -69,7 +70,6 @@ public class PlanetsRepository implements Repository<Planet>, PlanetsRepositoryS
 
     @Override
     public void addObserver(PlanetsRepositoryObserver observer) {
-        System.out.println("Observer added!");
         observers.add(observer);
     }
 
