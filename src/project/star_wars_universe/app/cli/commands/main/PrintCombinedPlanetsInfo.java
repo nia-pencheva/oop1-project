@@ -10,7 +10,6 @@ import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.repository.PlanetsRepository;
 import project.star_wars_universe.controllers.JediController;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,18 +33,14 @@ public class PrintCombinedPlanetsInfo implements Command {
         }
 
         try {
-            String planet2Name = input.get(2);
-            Planet planet2 = planetsRepository.getPlanetByName(planet2Name);
-            Set<Jedi> combinedJedi = new HashSet<>();
-            combinedJedi.addAll(planet1.getJediPopulation());
-            combinedJedi.addAll(planet2.getJediPopulation());
-            JediController.sortJediByName(combinedJedi);
+            Planet planet2 = planetsRepository.getPlanetByName(input.get(2));
+            Set<Jedi> combinedJedi = JediController.getCombinedJedi(planet1, planet2);
 
-            System.out.println("The jedi populating " + planet1.getName() + " and " + planet2.getName());
+            System.out.println("The jedi populating " + planet1.getName() + " and " + planet2.getName() + " are:");
             for(Jedi jedi : combinedJedi) {
+                System.out.println();
                 System.out.println(jedi);
             }
-
         }
         catch(PlanetDoesNotExistException ex) {
             System.out.println(ex.getMessage());

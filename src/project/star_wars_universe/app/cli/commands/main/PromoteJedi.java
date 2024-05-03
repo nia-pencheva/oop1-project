@@ -23,7 +23,7 @@ public class PromoteJedi implements Command {
             throw new WrongArgumentsCountException();
         }
 
-        if(AppDataManager.getInstance().getOpenedFile() == null) {
+        if(appDataManager.getOpenedFile() == null) {
             throw new NoFileOpenedException();
         }
 

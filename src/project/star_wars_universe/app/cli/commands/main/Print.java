@@ -1,7 +1,6 @@
 package project.star_wars_universe.app.cli.commands.main;
 
 import project.star_wars_universe.contracts.cli.Command;
-import project.star_wars_universe.controllers.JediController;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.models.jedi.Jedi;
@@ -14,7 +13,6 @@ import project.star_wars_universe.repository.PlanetsRepository;
 import project.star_wars_universe.util.comparators.jedi.JediByRankAndName;
 
 import java.util.List;
-import java.util.Set;
 
 public class Print implements Command {
     private AppDataManager appDataManager = AppDataManager.getInstance();

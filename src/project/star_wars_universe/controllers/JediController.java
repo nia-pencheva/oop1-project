@@ -9,22 +9,16 @@ import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.util.comparators.jedi.JediByAge;
 import project.star_wars_universe.util.comparators.jedi.JediByName;
-import project.star_wars_universe.util.comparators.jedi.JediByRankAndName;
 import project.star_wars_universe.util.comparators.jedi.JediByStrengthComparator;
 
 import java.util.*;
 
 public class JediController {
-    public static void sortJediByRankAndName(Set<Jedi> jedi) {
-        Set<Jedi> sortedJedi = new TreeSet<>(new JediByRankAndName());
-        sortedJedi.addAll(jedi);
-        jedi = sortedJedi;
-    }
-
-    public static void sortJediByName(Set<Jedi> jedi) {
-        Set<Jedi> sortedJedi = new TreeSet<>(new JediByName());
-        sortedJedi.addAll(jedi);
-        jedi = sortedJedi;
+    public static Set<Jedi> getCombinedJedi(Planet planet1, Planet planet2) {
+        Set<Jedi> combinedJedi = new TreeSet<>(new JediByName());
+        combinedJedi.addAll(planet1.getJediPopulation());
+        combinedJedi.addAll(planet2.getJediPopulation());
+        return combinedJedi;
     }
 
     public static Jedi getStrongestJediOnPlanet(Planet planet) throws PlanetDoesNotExistException {

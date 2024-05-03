@@ -33,8 +33,7 @@ public class RemoveJedi implements Command {
             String planetName = input.get(2);
 
             Jedi jedi = jediRepository.getJediByName(name);
-
-            PlanetsRepository.getInstance().getPlanetByName(planetName).removeJedi(jedi);
+            planetsRepository.getPlanetByName(planetName).removeJedi(jedi);
             jediRepository.remove(jedi);
             System.out.println("Jedi " + name + " was successfully removed!");
         }
