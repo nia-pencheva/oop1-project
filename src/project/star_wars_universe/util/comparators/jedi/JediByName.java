@@ -7,6 +7,6 @@ import java.util.Comparator;
 public class JediByName implements Comparator<Jedi> {
     @Override
     public int compare(Jedi jedi1, Jedi jedi2) {
-        return jedi1.getName().compareTo(jedi2.getName());
+        return jedi1.getName().toLowerCase().compareTo(jedi2.getName().toLowerCase());
     }
 }

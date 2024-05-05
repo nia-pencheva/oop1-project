@@ -3,6 +3,7 @@ package project.star_wars_universe.util.comparators.jedi;
 import project.star_wars_universe.models.jedi.Jedi;
 
 import java.util.Comparator;
+import java.util.Locale;
 
 public class JediByRankAndName implements Comparator<Jedi> {
     @Override
@@ -13,6 +14,6 @@ public class JediByRankAndName implements Comparator<Jedi> {
             return result;
         }
 
-        return jedi1.getName().compareTo(jedi2.getName());
+        return jedi1.getName().toLowerCase().compareTo(jedi2.getName().toLowerCase());
     }
 }

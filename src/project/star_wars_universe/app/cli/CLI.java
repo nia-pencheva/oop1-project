@@ -41,7 +41,10 @@ public class CLI {
             }
 
             if((currentCharacter == ' ' && !inQuotes)){
-                processedInput.add(currentSegment.toString());
+                if(!currentSegment.isEmpty()) {
+                    processedInput.add(currentSegment.toString());
+                }
+
                 currentSegment.setLength(0);
                 continue;
             }
