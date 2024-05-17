@@ -39,6 +39,8 @@ public class Open implements Command {
                 System.out.println("Data could not be read" + ((exceptionMessage != null) ? ": " + exceptionMessage : ""));
             }
             else if(ex instanceof IOException) {
+                System.out.println(input.get(1));
+                System.out.println(((IOException) ex).getMessage());
                 System.out.println("File could not be read");
             }
 
