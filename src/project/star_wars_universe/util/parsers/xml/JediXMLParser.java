@@ -9,6 +9,8 @@ import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.jedi.enums.SaberColor;
+import project.star_wars_universe.util.parsers.base_type.DoubleParser;
+import project.star_wars_universe.util.parsers.base_type.IntegerParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +36,9 @@ public class JediXMLParser implements Parser<NodeList, List<Jedi>> {
                         Element el = (Element) currentNode;
                         name = el.getElementsByTagName("name").item(0).getTextContent();
                         rank = Rank.getValue(el.getElementsByTagName("rank").item(0).getTextContent());
-                        age = Integer.parseInt(el.getElementsByTagName("age").item(0).getTextContent());
+                        age = (new IntegerParser()).parse(el.getElementsByTagName("age").item(0).getTextContent());
                         saberColor = SaberColor.getValue(el.getElementsByTagName("saber-color").item(0).getTextContent());
-                        power = Double.parseDouble(el.getElementsByTagName("power").item(0).getTextContent());
+                        power = (new DoubleParser()).parse(el.getElementsByTagName("power").item(0).getTextContent());
                         newJedi = new Jedi(name, rank, age, saberColor, power);
 
                         if(jediList.contains(newJedi)) {

@@ -8,6 +8,7 @@ import project.star_wars_universe.exceptions.jedi.InvalidRankException;
 import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
 import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
 import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
+import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetException;
@@ -16,6 +17,8 @@ import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.repository.JediRepository;
 import project.star_wars_universe.repository.PlanetsRepository;
+import project.star_wars_universe.util.parsers.base_type.DoubleParser;
+import project.star_wars_universe.util.parsers.base_type.IntegerParser;
 
 import java.util.List;
 
@@ -38,9 +41,9 @@ public class CreateJedi implements Command {
             String planetName = input.get(1);
             String name = input.get(2);
             Rank rank = Rank.getValue(input.get(3));
-            int age = Integer.parseInt(input.get(4));
+            int age = (new IntegerParser()).parse(input.get(4));
             SaberColor saberColor = SaberColor.getValue(input.get(5));
-            double power = Double.parseDouble(input.get(6));
+            double power = (new DoubleParser()).parse(input.get(6));
             Jedi newJedi = new Jedi(name, rank, age, saberColor, power);
 
             planetsRepository.getPlanetByName(planetName).addJedi(newJedi);
@@ -49,6 +52,9 @@ public class CreateJedi implements Command {
         }
         catch(JediAlreadyExistsException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | PlanetDoesNotExistException | JediExistsOnThisPlanetException ex) {
             System.out.println(ex.getMessage());
+        }
+        catch (ParsingFailureException ex) {
+            System.out.println(ex.getException().getMessage());
         }
     }
 }

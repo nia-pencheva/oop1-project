@@ -33,7 +33,9 @@ public class XMLParser implements Parser<String, AppData> {
 
     private Document convertStringToDOM(String content) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = builder.parse(new InputSource(new StringReader(content)));
+        StringReader reader = new StringReader(content);
+        Document document = builder.parse(new InputSource(reader));
+        reader.close();
         document.getDocumentElement().normalize();
         return document;
     }

@@ -21,5 +21,7 @@ public class Close implements Command {
         }
 
         appDataManager.unloadAppData();
+
+        System.out.println("File was successfully closed.");
     }
 }

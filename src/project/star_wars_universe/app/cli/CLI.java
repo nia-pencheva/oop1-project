@@ -15,13 +15,17 @@ public class CLI {
     private CommandsList commandsList = CommandsList.getInstance();
 
     public void start() {
+        printWelcomeMessage();
         Scanner in = new Scanner(System.in);
 
         while(true) {
             rawInput = in.nextLine();
             processInput();
-            readInput();
-            System.out.println();
+
+            if(!processedInput.isEmpty()) {
+                readInput();
+                System.out.println();
+            }
         }
     }
 
@@ -68,6 +72,12 @@ public class CLI {
                 printHelpMessage();
             }
         }
+    }
+
+    public void printWelcomeMessage() {
+        System.out.println("A long time ago in a galaxy far, far away...");
+        System.out.println("Welcome to Star Wars Universe! Type \"help\" to get started.");
+        System.out.println();
     }
 
     public void printHelpMessage() {
