@@ -14,6 +14,7 @@ public class CLI {
     private List<String> processedInput = new ArrayList<>();
     private CommandsList commandsList = CommandsList.getInstance();
 
+
     public void start() {
         printWelcomeMessage();
         Scanner in = new Scanner(System.in);
@@ -77,7 +78,6 @@ public class CLI {
     public void printWelcomeMessage() {
         System.out.println("A long time ago in a galaxy far, far away...");
         System.out.println("Welcome to Star Wars Universe! Type \"help\" to get started.");
-        System.out.println();
     }
 
     public void printHelpMessage() {

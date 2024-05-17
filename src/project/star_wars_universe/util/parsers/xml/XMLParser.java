@@ -27,7 +27,7 @@ public class XMLParser implements Parser<String, AppData> {
             return new AppData(jedi, planets);
         }
         catch(IOException | SAXException | ParserConfigurationException ex) {
-            throw new ParsingFailureException();
+            throw new ParsingFailureException(ex);
         }
     }
 
