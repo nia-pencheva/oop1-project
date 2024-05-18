@@ -1,10 +1,14 @@
 package project.star_wars_universe;
 
-import project.star_wars_universe.app.App;
-
+/**
+ * The entry point of the program
+ */
 public class Main {
-    public static void main(String[] args) throws Exception {
+    /**
+     * Initializes the App class and starts the application
+     * @param args
+     */
+    public static void main(String[] args) {
         (new App()).start();
-        //test
     }
 }
