@@ -1,10 +1,9 @@
 package project.star_wars_universe.util.parsers.base_type;
 
-import project.star_wars_universe.contracts.util.Parser;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 
-public class DoubleParser implements Parser<String, Double> {
-    public Double parse(String content) throws ParsingFailureException {
+public class DoubleParser {
+    public static Double parse(String content) throws ParsingFailureException {
         try {
             Double doubleNum = Double.parseDouble(content);
             return doubleNum;

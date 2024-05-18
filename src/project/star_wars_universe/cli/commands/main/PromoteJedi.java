@@ -1,12 +1,14 @@
 package project.star_wars_universe.cli.commands.main;
 
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.jedi.*;
+import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.models.jedi.Jedi;
-import project.star_wars_universe.repository.JediRepository;
+import project.star_wars_universe.data.repository.JediRepository;
+import project.star_wars_universe.util.parsers.base_type.DoubleParser;
 
 import java.util.List;
 
@@ -25,8 +27,8 @@ public class PromoteJedi implements Command {
 
     /**
      * Gets the specified jedi from the {@link JediRepository}, promotes them and displays a message if the operation was successful.
-     * If the specified jedi does not exist in the {@link JediRepository} ({@link JediDoesNotExistException}),
-     * the highest possible rank is reached ({@link HighestRankReachedException}),
+     * If a {@link ParsingFailureException} occurs, the specified jedi does not exist in the {@link JediRepository}
+     * ({@link JediDoesNotExistException}), the highest possible rank is reached ({@link HighestRankReachedException}),
      * the promotion multiplier is invalid ({@link InvalidPromotionMultiplierException}) or
      * that jedi's power cannot be changed by the specified multiplier because it causes
      * the power to exceed the allowed limits ({@link InvalidPowerException}),
@@ -46,9 +48,9 @@ public class PromoteJedi implements Command {
         }
 
         String name = input.get(1);
-        double multiplier = Double.parseDouble(input.get(2));
 
         try {
+            double multiplier = DoubleParser.parse(input.get(2));
             Jedi jedi = jediRepository.getJediByName(name);
 
             jedi.promoteJedi(multiplier);
@@ -58,7 +60,10 @@ public class PromoteJedi implements Command {
             System.out.println(ex.getMessage());
         }
         catch(InvalidPowerException ex) {
-            System.out.println("The jedi's power cannot be changed by multiplier " + multiplier + " because it causes the power to exceed the limits (0 - 1000)");
+            System.out.println("The jedi's power cannot be changed by this multiplier because it causes the power to exceed the limits (0 - 1000)");
+        }
+        catch (ParsingFailureException ex) {
+            System.out.println(ex.getException().getMessage());
         }
     }
 }

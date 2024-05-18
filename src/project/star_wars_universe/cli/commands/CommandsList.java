@@ -1,7 +1,6 @@
 package project.star_wars_universe.cli.commands;
 
 import project.star_wars_universe.cli.commands.main.GetMostUsedSaberColor;
-import project.star_wars_universe.contracts.cli.Command;
 import project.star_wars_universe.cli.commands.file.*;
 import project.star_wars_universe.cli.commands.main.*;
 import project.star_wars_universe.cli.commands.util.*;
@@ -15,7 +14,7 @@ import java.util.Map;
 /**
  * A singleton class which is responsible for adding, removing, initializing and
  * providing of all the commands of the application. It is also an observer of the
- * {@link project.star_wars_universe.repository.PlanetsRepository} class.
+ * {@link project.star_wars_universe.data.repository.PlanetsRepository} class.
  */
 public class CommandsList implements PlanetsRepositoryObserver {
     /**
@@ -24,7 +23,7 @@ public class CommandsList implements PlanetsRepositoryObserver {
     private static CommandsList instance = new CommandsList();
     /**
      * A <code>Map</code> containing the <code>String</code>s for invoking the
-     * commands as keys and the implementations of the {@link project.star_wars_universe.contracts.cli.Command} interface
+     * commands as keys and the implementations of the {@link Command} interface
      * for each corresponding command as values.
      */
     private Map<String, Command> commands = new HashMap<>();
@@ -47,7 +46,7 @@ public class CommandsList implements PlanetsRepositoryObserver {
     /**
      * Adds a new command to the {@link CommandsList#commands} map.
      * @param command the <code>String</code> for invoking the command in the CLI.
-     * @param commandHandler the {@link project.star_wars_universe.contracts.cli.Command} implementation responsible for executing the command.
+     * @param commandHandler the {@link Command} implementation responsible for executing the command.
      */
     public void addCommand(String command, Command commandHandler) {
         commands.put(command, commandHandler);
@@ -62,9 +61,9 @@ public class CommandsList implements PlanetsRepositoryObserver {
     }
 
     /**
-     * Gets the the {@link project.star_wars_universe.contracts.cli.Command} implementation responsible for executing the command.
+     * Gets the the {@link Command} implementation responsible for executing the command.
      * @param command the <code>String</code> for invoking the command in the CLI.
-     * @return the {@link project.star_wars_universe.contracts.cli.Command} implementation responsible for executing the command.
+     * @return the {@link Command} implementation responsible for executing the command.
      * @throws UnknownCommandException if the command <code>String</code> does not exist as a key in the {@link CommandsList#commands} map.
      */
     public Command getCommand(String command) throws UnknownCommandException {
@@ -99,13 +98,13 @@ public class CommandsList implements PlanetsRepositoryObserver {
     }
 
     /**
-     * When a {@link Planet} is added to the {@link project.star_wars_universe.repository.PlanetsRepository},
+     * When a {@link Planet} is added to the {@link project.star_wars_universe.data.repository.PlanetsRepository},
      * this method adds a new instance of the {@link PrintCombinedPlanetsInfo} command to the {@link CommandsList#commands} map
      * for the new planet. This is necessary because when the user enters a command in the console, only the first segment
      * of the input is used to find the corresponding {@link Command} handler in the {@link CommandsList#commands} map.
      * (e.g. when the user enters "Naboo + Dagobah", "Naboo" is considered as the <code>String</code> for invoking a command
      * in the CLI).
-     * @param planet the new {@link Planet} added to the {@link project.star_wars_universe.repository.PlanetsRepository}.
+     * @param planet the new {@link Planet} added to the {@link project.star_wars_universe.data.repository.PlanetsRepository}.
      */
     @Override
     public void onPlanetAdded(Planet planet) {
@@ -113,10 +112,10 @@ public class CommandsList implements PlanetsRepositoryObserver {
     }
 
     /**
-     * When a {@link Planet} is removed from the {@link project.star_wars_universe.repository.PlanetsRepository},
+     * When a {@link Planet} is removed from the {@link project.star_wars_universe.data.repository.PlanetsRepository},
      * this method removes the {@link PrintCombinedPlanetsInfo} command from the {@link CommandsList#commands} map corresponding to
      * the removed planet.
-     * @param planet the {@link Planet} removed to the {@link project.star_wars_universe.repository.PlanetsRepository}.
+     * @param planet the {@link Planet} removed to the {@link project.star_wars_universe.data.repository.PlanetsRepository}.
      */
     @Override
     public void onPlanetRemoved(Planet planet) {

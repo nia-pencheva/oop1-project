@@ -1,6 +1,6 @@
 package project.star_wars_universe.cli.commands.main;
 
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.models.jedi.Jedi;
@@ -8,8 +8,8 @@ import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
-import project.star_wars_universe.repository.JediRepository;
-import project.star_wars_universe.repository.PlanetsRepository;
+import project.star_wars_universe.data.repository.JediRepository;
+import project.star_wars_universe.data.repository.PlanetsRepository;
 import project.star_wars_universe.util.comparators.jedi.JediByRankAndName;
 
 import java.util.Comparator;

@@ -1,7 +1,7 @@
 package project.star_wars_universe.cli.commands.util;
 
 import project.star_wars_universe.cli.enums.Commands;
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 
 import java.util.List;

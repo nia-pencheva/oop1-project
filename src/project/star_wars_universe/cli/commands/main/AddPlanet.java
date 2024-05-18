@@ -1,12 +1,12 @@
 package project.star_wars_universe.cli.commands.main;
 
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
-import project.star_wars_universe.repository.PlanetsRepository;
+import project.star_wars_universe.data.repository.PlanetsRepository;
 
 import java.util.List;
 

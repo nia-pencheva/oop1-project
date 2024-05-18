@@ -1,6 +1,6 @@
 package project.star_wars_universe.cli.commands.file;
 
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;

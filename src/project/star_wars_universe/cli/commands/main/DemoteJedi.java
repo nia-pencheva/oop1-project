@@ -1,6 +1,6 @@
 package project.star_wars_universe.cli.commands.main;
 
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
@@ -8,8 +8,10 @@ import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 import project.star_wars_universe.exceptions.jedi.LowestRankReachedException;
 import project.star_wars_universe.exceptions.jedi.InvalidPromotionMultiplierException;
 import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
+import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.models.jedi.Jedi;
-import project.star_wars_universe.repository.JediRepository;
+import project.star_wars_universe.data.repository.JediRepository;
+import project.star_wars_universe.util.parsers.base_type.DoubleParser;
 
 import java.util.List;
 
@@ -28,8 +30,8 @@ public class DemoteJedi implements Command {
 
     /**
      * Gets the specified jedi from the {@link JediRepository}, demotes them and displays a message if the operation was successful.
-     * If the specified jedi does not exist in the {@link JediRepository} ({@link JediDoesNotExistException}),
-     * the lowest possible rank is reached ({@link LowestRankReachedException}),
+     * If a {@link ParsingFailureException} occurs, the specified jedi does not exist in the {@link JediRepository}
+     * ({@link JediDoesNotExistException}), the lowest possible rank is reached ({@link LowestRankReachedException}),
      * the promotion multiplier is invalid ({@link InvalidPromotionMultiplierException}) or
      * that jedi's power cannot be changed by the specified multiplier because it causes
      * the power to exceed the allowed limits ({@link InvalidPowerException}),
@@ -51,7 +53,7 @@ public class DemoteJedi implements Command {
         String name = input.get(1);
 
         try {
-            double multiplier = Double.parseDouble(input.get(2));
+            double multiplier = DoubleParser.parse(input.get(2));
             Jedi jedi = jediRepository.getJediByName(name);
             jedi.demoteJedi(multiplier);
             System.out.println("Jedi " + name + " has been successfully demoted to rank " + jedi.getRank().getDisplayName());
@@ -60,7 +62,10 @@ public class DemoteJedi implements Command {
             System.out.println(ex.getMessage());
         }
         catch(InvalidPowerException ex) {
-            System.out.println("The jedi's power cannot be changed by multiplier " + multiplier + " because it causes the power to exceed the limits (0 - 1000)");
+            System.out.println("The jedi's power cannot be changed by this multiplier because it causes the power to exceed the limits (0 - 1000)");
+        }
+        catch (ParsingFailureException ex) {
+            System.out.println(ex.getException().getMessage());
         }
     }
 }

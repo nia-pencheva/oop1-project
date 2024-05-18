@@ -4,7 +4,7 @@ import project.star_wars_universe.contracts.data.DataLoader;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
-import project.star_wars_universe.repository.JediRepository;
+import project.star_wars_universe.data.repository.JediRepository;
 
 import java.util.List;
 

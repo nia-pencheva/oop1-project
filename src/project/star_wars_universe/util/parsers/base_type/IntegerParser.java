@@ -1,12 +1,10 @@
 package project.star_wars_universe.util.parsers.base_type;
 
-import project.star_wars_universe.contracts.util.Parser;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 
-public class IntegerParser implements Parser<String, Integer> {
+public class IntegerParser {
 
-    @Override
-    public Integer parse(String content) throws ParsingFailureException {
+    public static Integer parse(String content) throws ParsingFailureException {
         try {
             Integer integerNum = Integer.parseInt(content);
             return integerNum;

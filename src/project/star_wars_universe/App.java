@@ -2,7 +2,7 @@ package project.star_wars_universe;
 
 import project.star_wars_universe.cli.CLI;
 import project.star_wars_universe.cli.commands.CommandsList;
-import project.star_wars_universe.repository.PlanetsRepository;
+import project.star_wars_universe.data.repository.PlanetsRepository;
 
 /**
  * The class responsible for setting up the application

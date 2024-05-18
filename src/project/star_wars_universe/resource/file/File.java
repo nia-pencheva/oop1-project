@@ -29,7 +29,7 @@ public abstract class File {
         return path;
     }
 
-    public abstract Parser<String, AppData> getParser();
+    public abstract Parser<String> getParser();
 
-    public abstract Serializer<AppData, String> getSerializer();
+    public abstract Serializer<String> getSerializer();
 }

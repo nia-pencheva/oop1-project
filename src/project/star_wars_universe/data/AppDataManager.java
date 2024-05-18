@@ -8,8 +8,8 @@ import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.exceptions.util.SerializationFailureException;
-import project.star_wars_universe.repository.JediRepository;
-import project.star_wars_universe.repository.PlanetsRepository;
+import project.star_wars_universe.data.repository.JediRepository;
+import project.star_wars_universe.data.repository.PlanetsRepository;
 import project.star_wars_universe.resource.file.File;
 
 import java.io.IOException;

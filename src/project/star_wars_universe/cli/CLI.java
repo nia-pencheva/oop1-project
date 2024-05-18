@@ -1,5 +1,6 @@
 package project.star_wars_universe.cli;
 
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.cli.commands.CommandsList;
 import project.star_wars_universe.exceptions.cli.CommandExecutionException;
 import project.star_wars_universe.exceptions.cli.UnknownCommandException;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * The main class of the CLI. It is responsible for reading, validating and processing
- * the user input and invoking the correct {@link project.star_wars_universe.contracts.cli.Command} handler for executing the desired behaviours.
+ * the user input and invoking the correct {@link Command} handler for executing the desired behaviours.
  */
 public class CLI {
     /**
@@ -96,7 +97,7 @@ public class CLI {
 
     /**
      * Extracts the correct command from the {@link project.star_wars_universe.cli.commands.CommandsList}
-     * based on the first segment of the {@link CLI#processedInput} and execute it, passing the {@link CLI#processedInput} it it's {@link project.star_wars_universe.contracts.cli.Command#execute(List)} method.
+     * based on the first segment of the {@link CLI#processedInput} and execute it, passing the {@link CLI#processedInput} it it's {@link Command#execute(List)} method.
      * If it fails to find such a command of another type of {@link project.star_wars_universe.exceptions.cli.CommandExecutionException} occurs,
      * an appropriate error message and a help message are displayed in the console.
      */ 

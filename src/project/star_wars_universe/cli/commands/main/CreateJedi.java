@@ -1,6 +1,6 @@
 package project.star_wars_universe.cli.commands.main;
 
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.jedi.InvalidAgeException;
@@ -15,8 +15,8 @@ import project.star_wars_universe.exceptions.planets.JediExistsOnThisPlanetExcep
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.jedi.enums.SaberColor;
-import project.star_wars_universe.repository.JediRepository;
-import project.star_wars_universe.repository.PlanetsRepository;
+import project.star_wars_universe.data.repository.JediRepository;
+import project.star_wars_universe.data.repository.PlanetsRepository;
 import project.star_wars_universe.util.parsers.base_type.DoubleParser;
 import project.star_wars_universe.util.parsers.base_type.IntegerParser;
 
@@ -63,9 +63,9 @@ public class CreateJedi implements Command {
             String planetName = input.get(1);
             String name = input.get(2);
             Rank rank = Rank.getValue(input.get(3));
-            int age = (new IntegerParser()).parse(input.get(4));
+            int age = IntegerParser.parse(input.get(4));
             SaberColor saberColor = SaberColor.getValue(input.get(5));
-            double power = (new DoubleParser()).parse(input.get(6));
+            double power = DoubleParser.parse(input.get(6));
             Jedi newJedi = new Jedi(name, rank, age, saberColor, power);
 
             planetsRepository.getPlanetByName(planetName).addJedi(newJedi);

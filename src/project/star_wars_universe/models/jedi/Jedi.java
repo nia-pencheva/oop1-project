@@ -4,7 +4,7 @@ import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.jedi.*;
-import project.star_wars_universe.repository.PlanetsRepository;
+import project.star_wars_universe.data.repository.PlanetsRepository;
 
 import java.util.Objects;
 

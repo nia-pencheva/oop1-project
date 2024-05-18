@@ -1,6 +1,6 @@
 package project.star_wars_universe.cli.commands.main;
 
-import project.star_wars_universe.contracts.cli.Command;
+import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.CommandExecutionException;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
@@ -11,8 +11,8 @@ import project.star_wars_universe.exceptions.jedi_statistics.NoJediOfThisRankOnP
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.planets.Planet;
-import project.star_wars_universe.repository.PlanetsRepository;
-import project.star_wars_universe.controllers.JediController;
+import project.star_wars_universe.data.repository.PlanetsRepository;
+import project.star_wars_universe.services.JediStatisticsService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -83,7 +83,7 @@ public class GetMostUsedSaberColor implements Command {
         public void execute(List<String> input) throws CommandExecutionException {
             try {
                 Planet planet = planetsRepository.getPlanetByName(input.get(1));
-                System.out.println("The most used saber color which is used by at least one Grand Master jedi on the planet of " + planet.getName() + " is " + JediController.getMostUsedSaberColorByGrandMasterOnPlanet(planet).getColor());
+                System.out.println("The most used saber color which is used by at least one Grand Master jedi on the planet of " + planet.getName() + " is " + JediStatisticsService.getMostUsedSaberColorByGrandMasterOnPlanet(planet).getColor());
             }
             catch(PlanetDoesNotExistException | NoGrandMastersOnPlanetException ex) {
                 System.out.println(ex.getMessage());
@@ -111,7 +111,7 @@ public class GetMostUsedSaberColor implements Command {
             try {
                 Planet planet = planetsRepository.getPlanetByName(input.get(1));
                 Rank rank = Rank.getValue(input.get(2));
-                System.out.println("The most used saber color by jedi of rank " + rank.getDisplayName() + " on the planet of " + planet.getName() + " is " + JediController.getMostUsedSaberColorOfRankOnPlanet(rank, planet).getColor());
+                System.out.println("The most used saber color by jedi of rank " + rank.getDisplayName() + " on the planet of " + planet.getName() + " is " + JediStatisticsService.getMostUsedSaberColorOfRankOnPlanet(rank, planet).getColor());
             }
             catch(PlanetDoesNotExistException | InvalidRankException | NoJediOfThisRankOnPlanetException ex) {
                 System.out.println(ex.getMessage());
