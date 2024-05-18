@@ -10,7 +10,7 @@ import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.exceptions.util.SerializationFailureException;
 import project.star_wars_universe.data.repository.JediRepository;
 import project.star_wars_universe.data.repository.PlanetsRepository;
-import project.star_wars_universe.resource.file.File;
+import project.star_wars_universe.resource.File;
 
 import java.io.IOException;
 import java.util.List;

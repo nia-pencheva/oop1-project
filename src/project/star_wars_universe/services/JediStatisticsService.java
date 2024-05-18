@@ -7,9 +7,9 @@ import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.models.planets.Planet;
-import project.star_wars_universe.util.comparators.jedi.JediByAge;
-import project.star_wars_universe.util.comparators.jedi.JediByName;
-import project.star_wars_universe.util.comparators.jedi.JediByStrength;
+import project.star_wars_universe.util.comparators.JediByAge;
+import project.star_wars_universe.util.comparators.JediByName;
+import project.star_wars_universe.util.comparators.JediByStrength;
 
 import java.util.*;
 

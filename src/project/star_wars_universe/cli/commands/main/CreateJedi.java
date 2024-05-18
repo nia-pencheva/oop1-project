@@ -3,11 +3,7 @@ package project.star_wars_universe.cli.commands.main;
 import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
-import project.star_wars_universe.exceptions.jedi.InvalidAgeException;
-import project.star_wars_universe.exceptions.jedi.InvalidRankException;
-import project.star_wars_universe.exceptions.jedi.InvalidSaberColorException;
-import project.star_wars_universe.exceptions.jedi.JediAlreadyExistsException;
-import project.star_wars_universe.exceptions.jedi.InvalidPowerException;
+import project.star_wars_universe.exceptions.jedi.*;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
@@ -41,7 +37,7 @@ public class CreateJedi implements Command {
 
     /**
      * Parses the user input, creates a new {@link Jedi} object, adds it to the specified planet's {@link project.star_wars_universe.models.planets.Planet#jediPopulation}
-     * and to the {@link JediRepository} and notifies the user if the operation was successfully completed. If any of the input data is invalid ({@link InvalidRankException},
+     * and to the {@link JediRepository} and notifies the user if the operation was successfully completed. If any of the input data is invalid ({@link InvalidNameException}, {@link InvalidRankException},
      * {@link InvalidAgeException}, {@link InvalidSaberColorException}, {@link InvalidPowerException}), a {@link ParsingFailureException} occurs, the planet does not exist
      * ({@link PlanetDoesNotExistException}), a jedi with that name already exists on this planet ({@link JediExistsOnThisPlanetException}) or the jedi already exists in the
      * {@link JediRepository} ({@link JediAlreadyExistsException}), an appropriate error message is displayed.
@@ -72,7 +68,7 @@ public class CreateJedi implements Command {
             jediRepository.add(newJedi);
             System.out.println("Jedi " + name + " was successfully created!");
         }
-        catch(JediAlreadyExistsException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | PlanetDoesNotExistException | JediExistsOnThisPlanetException ex) {
+        catch(InvalidNameException | JediAlreadyExistsException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | PlanetDoesNotExistException | JediExistsOnThisPlanetException ex) {
             System.out.println(ex.getMessage());
         }
         catch (ParsingFailureException ex) {

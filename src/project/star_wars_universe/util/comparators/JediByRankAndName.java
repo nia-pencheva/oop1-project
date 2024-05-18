@@ -1,0 +1,19 @@
+package project.star_wars_universe.util.comparators;
+
+import project.star_wars_universe.models.jedi.Jedi;
+
+import java.util.Comparator;
+import java.util.Locale;
+
+public class JediByRankAndName implements Comparator<Jedi> {
+    @Override
+    public int compare(Jedi jedi1, Jedi jedi2) {
+        int result = jedi1.getRank().compareTo(jedi2.getRank());
+
+        if(result != 0) {
+            return result;
+        }
+
+        return jedi1.getName().toLowerCase().compareTo(jedi2.getName().toLowerCase());
+    }
+}

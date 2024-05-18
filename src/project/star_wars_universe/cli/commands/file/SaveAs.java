@@ -5,7 +5,7 @@ import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.util.SerializationFailureException;
-import project.star_wars_universe.resource.file.XMLFile;
+import project.star_wars_universe.resource.XMLFile;
 
 import java.io.IOException;
 import java.util.List;

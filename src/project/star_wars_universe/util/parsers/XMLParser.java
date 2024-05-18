@@ -86,7 +86,7 @@ public class XMLParser implements Parser<String> {
 
             return jediList;
         }
-        catch(InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | JediAlreadyExistsException ex) {
+        catch(InvalidNameException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | JediAlreadyExistsException ex) {
             throw new ParsingFailureException(ex);
         }
     }
@@ -135,7 +135,7 @@ public class XMLParser implements Parser<String> {
 
             return planetsSet;
         }
-        catch(JediExistsOnThisPlanetException | JediDoesNotExistException ex) {
+        catch(project.star_wars_universe.exceptions.planets.InvalidNameException | JediExistsOnThisPlanetException | JediDoesNotExistException ex) {
             throw new ParsingFailureException(ex);
         }
     }

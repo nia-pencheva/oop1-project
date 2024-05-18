@@ -4,6 +4,7 @@ import project.star_wars_universe.cli.commands.Command;
 import project.star_wars_universe.exceptions.cli.NoFileOpenedException;
 import project.star_wars_universe.data.AppDataManager;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
+import project.star_wars_universe.exceptions.planets.InvalidNameException;
 import project.star_wars_universe.models.planets.Planet;
 import project.star_wars_universe.exceptions.planets.PlanetAlreadyExistsException;
 import project.star_wars_universe.data.repository.PlanetsRepository;
@@ -25,7 +26,8 @@ public class AddPlanet implements Command {
 
     /**
      * Adds a new {@link Planet} to the {@link PlanetsRepository} and notifies the user if the operation was successful.
-     * If the planet already exists, an error message is displayed.
+     * If the planet already exists ({@link PlanetAlreadyExistsException}) or the planet name is invalid ({@link InvalidNameException}),
+     * an appropriate error message is displayed.
      * @param input the user input.
      * @throws NoFileOpenedException if a file is not opened.
      * @throws WrongArgumentsCountException if the arguments count is incorrect.
@@ -47,7 +49,7 @@ public class AddPlanet implements Command {
             planetsRepository.add(newPlanet);
             System.out.println("Planet " + input.get(1) + " was successfully added!");
         }
-        catch(PlanetAlreadyExistsException ex) {
+        catch(PlanetAlreadyExistsException | InvalidNameException ex) {
             System.out.println(ex.getMessage());
         }
     }

@@ -6,7 +6,7 @@ import project.star_wars_universe.exceptions.cli.FileAlreadyOpenedException;
 import project.star_wars_universe.exceptions.cli.WrongArgumentsCountException;
 import project.star_wars_universe.exceptions.data.DataLoadingException;
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
-import project.star_wars_universe.resource.file.XMLFile;
+import project.star_wars_universe.resource.XMLFile;
 
 import java.io.IOException;
 import java.util.List;

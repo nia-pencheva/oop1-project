@@ -10,7 +10,7 @@ import project.star_wars_universe.exceptions.jedi.JediDoesNotExistException;
 import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.data.repository.JediRepository;
 import project.star_wars_universe.data.repository.PlanetsRepository;
-import project.star_wars_universe.util.comparators.jedi.JediByRankAndName;
+import project.star_wars_universe.util.comparators.JediByRankAndName;
 
 import java.util.Comparator;
 import java.util.List;
