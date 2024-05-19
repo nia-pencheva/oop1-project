@@ -44,7 +44,7 @@ public class PrintCombinedPlanetsInfo implements Command {
 
     /**
      * Gets the second {@link Planet} by name from the {@link PlanetsRepository} and, using the
-     * {@link JediStatisticsService#getCombinedJedi(Planet, Planet)} method, gets a <code>Set</code> of
+     * {@link JediStatisticsService#getCombinedJedi(Planet, Planet)} method, gets a {@code Set} of
      * the {@link Jedi} from both planets' {@link Planet#jediPopulation}s sorted by name lexicographically (ascending).
      * Finally, it displays them using {@link Jedi#toString()} implicitly.
      * @param input the user input.

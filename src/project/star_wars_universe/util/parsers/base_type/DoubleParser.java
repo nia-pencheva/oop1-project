@@ -2,7 +2,18 @@ package project.star_wars_universe.util.parsers.base_type;
 
 import project.star_wars_universe.exceptions.util.ParsingFailureException;
 
+/**
+ * Parses values to type {@link Double}.
+ */
 public class DoubleParser {
+    /**
+     * Converts a {@code String} to a {@code Double}. In case of a {@link NumberFormatException},
+     * the exception is caught and an exception with a more appropriate error message is passed to
+     * an {@link ParsingFailureException} instance, from which it can later be obtained.
+     * @param content the {@code String} that should be converted.
+     * @return the input {@code String} parsed into a {@code Double} value.
+     * @throws ParsingFailureException if an exception occurs during the parsing process.
+     */
     public static Double parse(String content) throws ParsingFailureException {
         try {
             Double doubleNum = Double.parseDouble(content);

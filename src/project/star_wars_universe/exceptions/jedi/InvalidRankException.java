@@ -1,7 +1,13 @@
 package project.star_wars_universe.exceptions.jedi;
 
+/**
+ * Thrown when an invalid value for {@link project.star_wars_universe.models.jedi.Jedi#rank} is attempted to be set.
+ */
 public class InvalidRankException extends Exception {
+    /**
+     * Initializes the exception instance with a default error message (passed to the {@link Exception}'s constructor).
+     */
     public InvalidRankException() {
-        super("Invalid rank!");
+        super("Invalid rank for jedi!");
     }
 }

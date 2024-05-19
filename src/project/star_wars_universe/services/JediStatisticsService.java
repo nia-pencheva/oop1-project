@@ -73,12 +73,12 @@ public class JediStatisticsService {
 
     /**
      * Gets the most used saber color by at least one Grand Master on a specified planet. First, the {@link Planet#jediPopulation}
-     * is iterated over in order to gather all the saber colors used by Grand Masters in a <code>saberColorsUsedByGrandMasters</code>
+     * is iterated over in order to gather all the saber colors used by Grand Masters in a {@code saberColorsUsedByGrandMasters}
      * map where the key is the {@link SaberColor} and the value is the number of jedi using sabers of that color, which is initialy 0.
      * If the map is empty after the loop, a {@link NoGrandMastersOnPlanetException} is thrown. Otherwise, the specified planet's
      * population is once again iterated over. At each repetition it is checked whether the current jedi's saber color exists as a key
-     * in the <code>saberColorsUsedByGrandMasters</code> map and if yes the number of jedi using sabers of that color (the map corresponding value)
-     * is incremented. Lastly, using the {@link Collections#max(Collection)} method and passing to it the <code>saberColorsUsedByGrandMasters</code>'s
+     * in the {@code saberColorsUsedByGrandMasters} map and if yes the number of jedi using sabers of that color (the map corresponding value)
+     * is incremented. Lastly, using the {@link Collections#max(Collection)} method and passing to it the {@code saberColorsUsedByGrandMasters}'s
      * entry set retrieved using the {@link Map#entrySet()} method and the comparator retrieved using the {@link Map.Entry#comparingByValue()} method,
      * we get the key of the returned entry set instance, which is the wanted {@link SaberColor}.
      * @param planet the planet whose jedi population should be searched over.
@@ -114,10 +114,10 @@ public class JediStatisticsService {
     /**
      * Gets the most used saber color used by the jedi of a specified rank on a given planet.
      * First, the {@link Planet#jediPopulation} is iterated over in order to accumulate the numbers
-     * of jedi using different saber colors inside a <code>saberColorsUsedByRank</code> map
+     * of jedi using different saber colors inside a {@code saberColorsUsedByRank} map
      * where the key is the {@link SaberColor} and the value is the number of jedi using sabers of that color.
      * If the map is empty after the loop, a {@link NoJediOfThisRankOnPlanetException} exception is thrown.
-     * Otherwise, using the {@link Collections#max(Collection)} method and passing to it the <code>saberColorsUsedByRank</code>'s
+     * Otherwise, using the {@link Collections#max(Collection)} method and passing to it the {@code saberColorsUsedByRank}'s
      * entry set retrieved using the {@link Map#entrySet()} method and the comparator retrieved using the {@link Map.Entry#comparingByValue()} method,
      * we get the key of the returned entry set instance, which is the wanted {@link SaberColor}.
      * @param rank the rank by which the search for the most used saber color should be filtered.

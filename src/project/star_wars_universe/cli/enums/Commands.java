@@ -1,5 +1,12 @@
 package project.star_wars_universe.cli.enums;
 
+/**
+ * Contains enum values representing all the supported commands of the CLI with their syntax and description.
+ * The reason why the syntax and the description are not contained in every {@link project.star_wars_universe.cli.commands.Command}
+ * implementation is that commands such as {@link project.star_wars_universe.cli.commands.main.PrintCombinedPlanetsInfo} have a more
+ * flexible syntax that is independent of it's concrete variations (e.g. "Naboo + Dagobah" corresponds to the
+ * "{@code <planet_name>} + {@code <planet_name>}" syntax).
+ */
 public enum Commands {
     HELP("help", "prints this information"),
     OPEN("open <file>", "opens <file>"),
@@ -18,20 +25,41 @@ public enum Commands {
     GET_MOST_USED_SABER_COLOR("get_most_used_saber_color <planet_name>", "print the most used saber color on that planet"),
     PRINT_PLANET("print <planet_name>", "print information about that planet"),
     PRINT_JEDI("print <jedi_name>", "print information about that jedi"),
-    PRINT_PLANETS("<planet_name> + <planet_name>", "print information about the jedi populating the two planets");
+    PRINT_PLANETS("<planet_name> + <planet_name>", "print information about the jedi populating the two planets"),
+    PRINT_ALL_JEDI("print_all_jedi", "prints all jedi"),
+    PRINT_ALL_PLANETS("print_all_planets", "prints all planets");
 
+    /**
+     * The command's syntax.
+     */
     private String syntax;
+    /**
+     * The command's description.
+     */
     private String description;
 
+    /**
+     * Initializes the enum value for a command with its syntax and description.
+     * @param syntax the command's syntax.
+     * @param description the command's description.
+     */
     Commands(String syntax, String description) {
         this.syntax = syntax;
         this.description = description;
     }
 
+    /**
+     * Gets the command's syntax.
+     * @return the command's syntax.
+     */
     public String getSyntax() {
         return syntax;
     }
 
+    /**
+     * Gets the command's description.
+     * @return the command's description.
+     */
     public String getDescription() {
         return description;
     }

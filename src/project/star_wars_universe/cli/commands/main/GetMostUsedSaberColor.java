@@ -31,7 +31,7 @@ public class GetMostUsedSaberColor implements Command {
      */
     private PlanetsRepository planetsRepository = PlanetsRepository.getInstance();
     /**
-     * A <code>Map</code> containing the number of arguments the command takes
+     * A {@code Map} containing the number of arguments the command takes
      * as key and the corresponding {@link Command} handler as value.
      */
     private Map<Integer, Command> subCommands = new HashMap<>() {

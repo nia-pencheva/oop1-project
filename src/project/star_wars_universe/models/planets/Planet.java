@@ -16,7 +16,7 @@ public class Planet {
      */
     private final String name;
     /**
-     * A <code>Set</code> of the {@link Jedi} populating the planet.
+     * A {@code Set} of the {@link Jedi} populating the planet.
      */
     private Set<Jedi> jediPopulation = new HashSet<>();
 
@@ -43,7 +43,7 @@ public class Planet {
     /**
      * Gets the planet's jedi population. The {@link Planet#jediPopulation} is not directly
      * returned in order to prevent it from being modified. Instead, it is passed to
-     * a new <code>HashSet</code>.
+     * a new {@code HashSet}.
      * @return
      */
     public Set<Jedi> getJediPopulation() {
@@ -87,7 +87,7 @@ public class Planet {
 
     /**
      * Sorts the jedi population with the help of a specified comparator.
-     * The current {@link Planet#jediPopulation} is added to a <code>TreeSet</code>
+     * The current {@link Planet#jediPopulation} is added to a {@code TreeSet}
      * initialized with the specified comparator, which is then assigned
      * to the {@link Planet#jediPopulation} field.
      * @param comparator

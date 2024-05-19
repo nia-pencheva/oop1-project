@@ -10,8 +10,9 @@ import java.util.List;
  * for the {@link project.star_wars_universe.cli.commands.Command#execute(List)} method
  * to throw a long list of different exceptions, some of which might not ever
  * be thrown by a particular {@link project.star_wars_universe.cli.commands.Command} implementation.
- * Instead, only this exception is thrown, and in a concrete {@link project.star_wars_universe.cli.commands.Command}
- * implementations there could be specific exceptions signified.
+ * Instead, only this exception is thrown by the {@link project.star_wars_universe.cli.commands.Command#execute(List)} method,
+ * and in a concrete {@link project.star_wars_universe.cli.commands.Command}
+ * implementation there could be specific exceptions signified.
  */
 public class CommandExecutionException extends Exception {
     /**
@@ -22,7 +23,7 @@ public class CommandExecutionException extends Exception {
     }
 
     /**
-     * Initializes the exception with some provided error message.
+     * Initializes the exception with a provided error message.
      * @param message the error message provided for the current exception instance.
      */
     public CommandExecutionException(String message) {

@@ -1,5 +1,6 @@
 package project.star_wars_universe.models.jedi;
 
+import project.star_wars_universe.exceptions.planets.PlanetDoesNotExistException;
 import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.models.planets.Planet;
@@ -209,7 +210,13 @@ public class Jedi {
     @Override
     public String toString() {
         String lineSeparator = System.getProperty("line.separator");
-        Planet planet = PlanetsRepository.getInstance().getPlanetByJedi(this);
+        Planet planet = null;
+
+        try {
+            planet = PlanetsRepository.getInstance().getPlanetByJedi(this);
+        }
+        catch(PlanetDoesNotExistException ex) {}
+
 
         StringBuilder builder = new StringBuilder();
         builder.append("Jedi Information: " + lineSeparator);

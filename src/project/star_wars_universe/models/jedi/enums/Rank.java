@@ -8,7 +8,7 @@ import project.star_wars_universe.exceptions.jedi.InvalidRankException;
 public enum Rank {
     YOUNGLING(1, "youngling", "Youngling"),
     INITIATE(2, "initiate", "Initiate"),
-    PADAWAN(3, "padwan", "padwan"),
+    PADAWAN(3, "padawan", "padwan"),
     KNIGHT_ASPIRANT(4, "knight_aspirant", "Knight Aspirant"),
     KNIGHT(5, "knight", "Knight"),
     MASTER(6, "master", "Master"),

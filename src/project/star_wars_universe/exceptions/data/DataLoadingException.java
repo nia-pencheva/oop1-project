@@ -25,7 +25,7 @@ public class DataLoadingException extends Exception {
 
     /**
      * Gets the specific exception thrown during the data loading process.
-     * @returnthe specific exception thrown during the data loading process
+     * @return the specific exception thrown during the data loading process
      */
     public Exception getException() {
         return exception;

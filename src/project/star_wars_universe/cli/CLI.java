@@ -16,13 +16,13 @@ import java.util.Scanner;
  */
 public class CLI {
     /**
-     * Stores the raw input <code>String</code>, exactly as it was entered by the user.
+     * Stores the raw input {@code String}, exactly as it was entered by the user.
      */
     private String rawInput = "";
     /**
-     * Stores the processed input in the form of an <code>ArrayList</code>
+     * Stores the processed input in the form of an {@code ArrayList}
      * where each space separated or quotation marks enclosed segment is
-     * a different list element of type <code>String</code>.
+     * a different list element of type {@code String}.
      */
     private List<String> processedInput = new ArrayList<>();
     /**
@@ -55,7 +55,7 @@ public class CLI {
     /**
      * Processes the raw user input. Firstly, the {@link CLI#processedInput} is
      * cleared. Secondly, the {@link CLI#rawInput} is read character by character.
-     * If a quotation mark is encountered, the <code>inQuotes</code> variable, responsible
+     * If a quotation mark is encountered, the {@code inQuotes} variable, responsible
      * for noting whether the subsequent input should be separated by spaces or should
      * be treated as a whole segment, gets toggled. If a space is encountered and the current character
      * is NOT a part of a quotes enclosed segment, the current segment is added to the {@link CLI#processedInput},
