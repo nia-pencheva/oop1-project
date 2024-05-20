@@ -8,6 +8,6 @@ public class InvalidPowerException extends Exception {
      * Initializes the exception instance with a default error message (passed to the {@link Exception}'s constructor).
      */
     public InvalidPowerException() {
-        super("Invalid value for power!");
+        super("Invalid value for jedi's power!");
     }
 }

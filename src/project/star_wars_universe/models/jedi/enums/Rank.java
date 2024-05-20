@@ -20,7 +20,7 @@ public enum Rank {
      */
     private int rankOrder;
     /**
-     * The rank rank name by which a Rank instance can be indicated by the user.
+     * The name by which a {@link Rank} instance can be indicated by the user.
      */
     private String rank;
     /**
@@ -29,9 +29,9 @@ public enum Rank {
     private String displayName;
 
     /**
-     * Initializes the Rank instance.
+     * Initializes the {@link Rank} instance.
      * @param rankOrder the order of the rank in the hierarchy.
-     * @param rank the rank name by which a Rank instance can be indicated by the user.
+     * @param rank the name by which a {@link Rank} instance can be indicated by the user.
      * @param displayName the formatted name appropriate for being displayed.
      */
     private Rank(int rankOrder, String rank, String displayName) {
@@ -41,34 +41,34 @@ public enum Rank {
     }
 
     /**
-     * Gets the rank order.
-     * @return the rank order
+     * Gets the rank's order in the hierarchy.
+     * @return the rank's order in the hierarchy.
      */
     public int getRankOrder() {
         return rankOrder;
     }
 
     /**
-     * Gets the rank name by which a Rank instance can be indicated by the user.
-     * @return the rank name.
+     * Gets the name by which a {@link Rank} instance can be indicated by the user
+     * @return the name by which a {@link Rank} instance can be indicated by the user.
      */
     public String getRank() {
         return rank;
     }
 
     /**
-     * Gets the rank display name.
-     * @return the display name.
+     * Gets the rank's display name.
+     * @return the rank's display name.
      */
     public String getDisplayName() {
         return displayName;
     }
 
     /**
-     * Gets the Rank instance corresponding to a specified name.
+     * Gets the {@link Rank} instance corresponding to a specified name.
      * @param rank the specified rank name.
-     * @return the relevant Rank instance.
-     * @throws InvalidRankException if no such rank exists.
+     * @return the relevant {@link Rank} instance.
+     * @throws InvalidRankException if no rank with that name exists.
      */
     public static Rank getValue(String rank) throws InvalidRankException {
         for(Rank e: Rank.values()) {
@@ -83,8 +83,8 @@ public enum Rank {
     /**
      * Gets the Rank instance corresponding to a specified rank order.
      * @param rankOrder the specified rank order.
-     * @return the relevant Rank instance.
-     * @throws InvalidRankException if no such rank exists.
+     * @return the relevant {@link Rank} instance.
+     * @throws InvalidRankException if no rank with that order number exists.
      */
     public static Rank getRankByOrder(int rankOrder) throws InvalidRankException {
         for(Rank e: Rank.values()) {

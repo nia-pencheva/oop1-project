@@ -7,7 +7,7 @@ import java.util.Comparator;
 /**
  * A {@link Comparator} implementation which imposes an order
  * based on the {@link Jedi#name} field on a collection of {@link Jedi}.
- * The collection's items are sorted in ascending order (lexicographically).
+ * The collection's items are sorted in ascending order lexicographically.
  */
 public class JediByName implements Comparator<Jedi> {
 

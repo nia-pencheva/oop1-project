@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * Represents a file. It is an abstract class, therefore it cannot be instantiated.
- * It is supposed to be extended by classes representing files of concrete formats
+ * It is supposed to be extended by classes representing files of specific formats
  * (.xml, .txt, etc.). It contains a path to an actual file, as well as
  * a {@link Parser} and a {@link Serializer}.
  */
@@ -32,7 +32,7 @@ public abstract class File {
     /**
      * Initializes an instance of the {@link File} class with the path of the file it should represent
      * and a parser and a serializer corresponding to the file's data format.
-     * @param path the path of the file that the {@link File} instance should it should represent
+     * @param path the path of the file that the {@link File} instance should represent
      * @param parser an appropriate {@link Parser} capable of parsing the data in the file.
      * @param serializer an appropriate {@link Serializer} capable of serializing the application data to the file's data format.
      */
@@ -46,7 +46,7 @@ public abstract class File {
      * Gets all data from the file represented by the {@link File} instance.
      * A {@link FileReader} is used to read the data.
      * @return the data fetched from the file.
-     * @throws IOException f an exception occurs while the file is being read.
+     * @throws IOException if an exception occurs while the file is being read.
      */
     public String getData() throws IOException {
         return (new FileReader(path)).read();
@@ -56,7 +56,7 @@ public abstract class File {
      * Saves data to the file represented by the {@link File} instance.
      * A {@link FileWriter} is used to write the data.
      * @param data the data that should be saved to the file.
-     * @throws IOException if an exception occurs while the file is being read.
+     * @throws IOException if an exception occurs while the file is being written to.
      */
     public void saveData(String data) throws IOException {
         (new FileWriter(path)).write(data);

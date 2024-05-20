@@ -64,8 +64,15 @@ public class CreateJedi implements Command {
             double power = DoubleParser.parse(input.get(6));
             Jedi newJedi = new Jedi(name, rank, age, saberColor, power);
 
-            planetsRepository.getPlanetByName(planetName).addJedi(newJedi);
-            jediRepository.add(newJedi);
+
+            if(!jediRepository.jediExists(newJedi)) {
+                planetsRepository.getPlanetByName(planetName).addJedi(newJedi);
+                jediRepository.add(newJedi);
+            }
+            else {
+                throw new JediAlreadyExistsException();
+            }
+
             System.out.println("Jedi " + name + " was successfully created!");
         }
         catch(InvalidNameException | JediAlreadyExistsException | InvalidRankException | InvalidAgeException | InvalidSaberColorException | InvalidPowerException | PlanetDoesNotExistException | JediExistsOnThisPlanetException ex) {

@@ -28,7 +28,7 @@ public class JediDataLoader implements DataLoader<List<Jedi>> {
      * If a {@link Jedi} already exists in the repository,
      * a {@link JediAlreadyExistsException} exception is thrown from
      * the {@link JediRepository#add(Jedi)} method. This exception is then
-     * passed to a {@link DataLoadingException}, from which the specific exception
+     * passed to a {@link DataLoadingException} instance, from which the specific exception
      * can later be extracted using the {@link DataLoadingException#getException()} method.
      * @param jedi the {@code List} of {@link Jedi} that should be loaded in the {@link JediRepository}.
      * @throws DataLoadingException if an exception occurs during the loading of the jedi.

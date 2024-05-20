@@ -15,7 +15,7 @@ public class JediByRankAndName implements Comparator<Jedi> {
     /**
      * Compares two {@link Jedi} objects based on their {@link Jedi#rank} fields first
      * and their {@link Jedi#name} fields second. The {@link Jedi#rank} fields, which are values from the
-     * {@link project.star_wars_universe.models.jedi.enums.Rank} enumeration, they are compared on
+     * {@link project.star_wars_universe.models.jedi.enums.Rank} enumeration, are compared based on
      * their ordinal values (their position in the enum declaration) by default.
      * @param jedi1 the first jedi.
      * @param jedi2 the second jedi.

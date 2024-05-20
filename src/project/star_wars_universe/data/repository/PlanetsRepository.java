@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class PlanetsRepository implements Repository<Planet> {
     /**
-     * The instance of the singleton.
+     * The {@link PlanetsRepository} instance.
      */
     private static PlanetsRepository instance = null;
     /**
@@ -34,15 +34,15 @@ public class PlanetsRepository implements Repository<Planet> {
     private List<PlanetsRepositoryObserver> observers = new ArrayList<>();
 
     /**
-     * Initializes the class. This constructor is private in accordance to the
+     * Initializes the class. The constructor is private in accordance to the
      * rules for implementing the singleton pattern.
      */
     private PlanetsRepository() {}
 
     /**
-     * Gets the {@link PlanetsRepository} singleton instance. Here, the lazy loading approach is used - the
+     * Gets the {@link PlanetsRepository} instance. Here, the lazy loading approach is used - the
      * singleton instance is only created when it is first accessed.
-     * @return the {@link PlanetsRepository} singleton instance.
+     * @return the {@link PlanetsRepository} instance.
      */
     public static PlanetsRepository getInstance() {
         if(instance == null) {
@@ -58,16 +58,16 @@ public class PlanetsRepository implements Repository<Planet> {
      * instead it returns a new {@code ArrayList} initialized with the values
      * of the {@link PlanetsRepository#planets} list so that it cannot be
      * directly manipulated from the outside.
-     * @return
+     * @return a {@code List} of the {@link Planet} entities in the repository.
      */
     public List<Planet> getPlanets() {
         return new ArrayList<>(planets);
     }
 
     /**
-     * Gets a {@link Planet} from the repository by a specified name.
+     * Gets a planet from the repository by a specified name.
      * @param name the name of the planet that is searched for.
-     * @return the {@link Planet} that is found.
+     * @return the planet that is found.
      * @throws PlanetDoesNotExistException if no planet with the specified name exists in the repository.
      */
     public Planet getPlanetByName(String name) throws PlanetDoesNotExistException {
@@ -81,10 +81,10 @@ public class PlanetsRepository implements Repository<Planet> {
     }
 
     /**
-     * Gets the {@link Planet} that a specified {@link Jedi} populates.
-     * @param jedi the {@link Jedi} whose {@link Planet} is searched for.
-     * @return the {@link Planet} which the specified {@link Jedi} populates.
-     * @throws PlanetDoesNotExistException if the specified {@link Jedi} does not populate any of the planets in the repository.
+     * Gets the planet that a specified jedi populates.
+     * @param jedi the jedi whose planet is searched for.
+     * @return the planet which the specified jedi populates.
+     * @throws PlanetDoesNotExistException if the specified jedi does not populate any of the planets in the repository.
      */
     public Planet getPlanetByJedi(Jedi jedi) throws PlanetDoesNotExistException {
         for(Planet planet : planets) {
@@ -111,7 +111,7 @@ public class PlanetsRepository implements Repository<Planet> {
     }
 
     /**
-     * Removes a planet from the repository.
+     * Removes a planet from the repository. The {@link PlanetsRepository#observers} get notified.
      * @param item the planet that should be removed.
      */
     @Override
@@ -130,7 +130,7 @@ public class PlanetsRepository implements Repository<Planet> {
 
     /**
      * Adds an observer to the class.
-     * @param observer the {@link PlanetsRepositoryObserver} instance that should be added to the list of observers of the class.
+     * @param observer the observer that should be added to the list of observers of the class.
      */
     public void addObserver(PlanetsRepositoryObserver observer) {
         observers.add(observer);
@@ -138,7 +138,7 @@ public class PlanetsRepository implements Repository<Planet> {
 
     /**
      * Removes an observer from the class.
-     * @param observer the {@link PlanetsRepositoryObserver} instance that should be removed from the list of observers of the class.
+     * @param observer the observer that should be removed from the list of observers of the class.
      */
     public void removeObserver(PlanetsRepositoryObserver observer) {
         observers.remove(observer);
@@ -146,7 +146,7 @@ public class PlanetsRepository implements Repository<Planet> {
 
     /**
      * Notifies the observers of the repository that a planet has been added.
-     * @param planet the {@link Planet} that has been added to the repository.
+     * @param planet the planet that has been added to the repository.
      */
     public void notifyPlanetAdded(Planet planet) {
         for(PlanetsRepositoryObserver observer : observers) {
@@ -156,7 +156,7 @@ public class PlanetsRepository implements Repository<Planet> {
 
     /**
      * Notifies the observers of the repository that a planet has been removed.
-     * @param planet the {@link Planet} that has been removed from the repository.
+     * @param planet the planet that has been removed from the repository.
      */
     public void notifyPlanetRemoved(Planet planet) {
         for(PlanetsRepositoryObserver observer : observers) {

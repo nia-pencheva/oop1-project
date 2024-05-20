@@ -8,8 +8,10 @@ import project.star_wars_universe.exceptions.util.ParsingFailureException;
 public class DoubleParser {
     /**
      * Converts a {@code String} to a {@code Double}. In case of a {@link NumberFormatException},
-     * the exception is caught and an exception with a more appropriate error message is passed to
-     * an {@link ParsingFailureException} instance, from which it can later be obtained.
+     * the exception is caught and an {@link Exception} with a more appropriate error message is instantiated and passed to
+     * a {@link ParsingFailureException} instance, from which it can later be obtained. This is because the
+     * {@link NumberFormatException} does not give sufficient information about the expected number format
+     * (whether it should be int or double).
      * @param content the {@code String} that should be converted.
      * @return the input {@code String} parsed into a {@code Double} value.
      * @throws ParsingFailureException if an exception occurs during the parsing process.

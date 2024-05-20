@@ -1,8 +1,8 @@
 package project.star_wars_universe.exceptions.planets;
 
 /**
- * thrown when a {@link project.star_wars_universe.models.planets.Planet} is attempted to be added to the
- * {@link project.star_wars_universe.data.repository.PlanetsRepository} when it already exists.
+ * Thrown when a {@link project.star_wars_universe.models.planets.Planet} is attempted to be added to the
+ * {@link project.star_wars_universe.data.repository.PlanetsRepository} when it already exists there.
  */
 public class PlanetAlreadyExistsException extends Exception {
     /**

@@ -5,6 +5,7 @@ project.star_wars_universe.cli.commands.file
 project.star_wars_universe.cli.commands.main
 project.star_wars_universe.cli.commands.util
 project.star_wars_universe.cli.enums
+project.star_wars_universe.contracts
 project.star_wars_universe.contracts.data
 project.star_wars_universe.contracts.input_output
 project.star_wars_universe.contracts.observer.planets_repository
@@ -12,6 +13,7 @@ project.star_wars_universe.contracts.util
 project.star_wars_universe.data
 project.star_wars_universe.data.loading
 project.star_wars_universe.data.repository
+project.star_wars_universe.exceptions
 project.star_wars_universe.exceptions.cli
 project.star_wars_universe.exceptions.data
 project.star_wars_universe.exceptions.jedi
@@ -19,6 +21,7 @@ project.star_wars_universe.exceptions.jedi_statistics
 project.star_wars_universe.exceptions.planets
 project.star_wars_universe.exceptions.util
 project.star_wars_universe.input_output
+project.star_wars_universe.models
 project.star_wars_universe.models.jedi
 project.star_wars_universe.models.jedi.enums
 project.star_wars_universe.models.planets

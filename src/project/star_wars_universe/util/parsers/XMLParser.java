@@ -38,12 +38,12 @@ public class XMLParser implements Parser<String> {
      * to a {@link Document} object using the {@link XMLParser#convertStringToDOM(String)} method.
      * The information about the jedi (contained in a {@code <jedi-list>} node) is converted to a {@code List} using the {@link XMLParser#parseJedi(NodeList)} method.
      * The information about the planets (contained in a {@code <planets-list>} node) is converted to a {@code List} using the {@link XMLParser#parsePlanets(NodeList, List)}} method.
-     * Using the two lists, an {@link AppData} is created and returned.
+     * Using the two lists, an {@link AppData} object is created and returned.
      * If an exception occurs during the parsing of the data ({@link IOException}, {@link SAXException}, {@link ParserConfigurationException})
      * the exception is caught and passed to a {@link ParsingFailureException}, from which the specific
      * exception can later be extracted using the {@link ParsingFailureException#getException()} method.
      * @param content the XML {@code String} that should be parsed.
-     * @return an {@link AppData} object containing the parsed application data.
+     * @return an {@link AppData} object containing the parsed data.
      * @throws ParsingFailureException if an exception occurs during the parsing process.
      */
     @Override
@@ -62,8 +62,8 @@ public class XMLParser implements Parser<String> {
 
     /**
      * Converts an XML {@code String} to a {@link Document} object.
-     * @param content the XML string which should be converted to a document.
-     * @return a {@link Document} object derived from the provided {@code String} content.
+     * @param content XML {@code String} which should be converted to a {@link Document}.
+     * @return a {@link Document} object derived from the provided XML {@code String}.
      * @throws IOException if any IO error occurs.
      * @throws SAXException if any parse error occurs.
      * @throws ParserConfigurationException if a DocumentBuilder cannot be created which satisfies the configuration requested.
@@ -85,14 +85,14 @@ public class XMLParser implements Parser<String> {
      *     <li>{@code <name>} - the jedi's name</li>
      *     <li>{@code <rank>} - the jedi's rank</li>
      *     <li>{@code <age>} - the jedi's age</li>
-     *     <li>{@code <saber-color> - the jedi's saber color}</li>
-     *     <li>{@code <power> - the jedi's power}</li>
+     *     <li>{@code <saber-color>} - the jedi's saber color</li>
+     *     <li>{@code <power>} - the jedi's power</li>
      * </ul>
      * These values are converted from {@code String} to their correct data types.
      * Then it is checked whether the current jedi has already been added to the {@code jediList}
      * variable and if not it is added to it. If the jedi has already been added to the {@code jediList}
      * ({@link JediAlreadyExistsException}) or any of the values provided for the fields of the jedi
-     * are invalid ({@link project.star_wars_universe.exceptions.planets.InvalidNameException}, {@link InvalidRankException},
+     * are invalid ({@link InvalidNameException}, {@link InvalidRankException},
      * {@link InvalidAgeException}, {@link InvalidSaberColorException}, {@link InvalidPowerException}),
      * the exception is passed to a {@link ParsingFailureException} instance, from which the specific
      * exception can later be extracted using the {@link ParsingFailureException#getException()} method.
@@ -147,13 +147,13 @@ public class XMLParser implements Parser<String> {
      * The {@link NodeList} containing the {@code <planets-list>} node's child elements is iterated through.
      * The data for each planet is extracted from the child nodes of each {@code <planet>} node:
      * <ul>
-     *     <li>{@code <name>} - the planet's name. A new {@link Planet} class with that name is instantiated.</li>
+     *     <li>{@code <name>} - the planet's name. A new {@link Planet} object with that name is instantiated.</li>
      *     <li>
      *         {@code <jedi-population>} - the planet's jedi population.
      *         It's {@code <jedi>} child nodes contain the name of each jedi that populates the planet.
      *         For each name it is checked whether it exists in the {@code jedi} map. If it does,
      *         it gets added to the newly created planet's jedi population. The jedi is then removed form the
-     *         {@code jedi} map.
+     *         {@code jedi} map (because each jedi should be assigned to only one planet).
      *     </li>
      * </ul>
      * Finally, the new planet is added to the {@code planetsList} variable. When all planets have been iterated
@@ -164,7 +164,7 @@ public class XMLParser implements Parser<String> {
      * is passed to a {@link ParsingFailureException} instance, from which the specific exception can later be extracted
      * using the {@link ParsingFailureException#getException()} method.
      * @param content a {@link NodeList} containing the {@code <planets-list>} node's child elements.
-     * @param jediList the {@code List} of {@link Jedi} that have been fetched from the XML.
+     * @param jediList the {@code List} of {@link Jedi} that have been fetched from the XML {@code String}.
      * @return a {@code List} of {@link Planet}s.
      * @throws ParsingFailureException if an exception occurs during the parsing process.
      */
@@ -200,6 +200,7 @@ public class XMLParser implements Parser<String> {
                                     jedi.remove(currentNode.getTextContent());
                                 }
                                 else {
+                                    System.out.println("Missing jedi: " + jediName);
                                     throw new JediDoesNotExistException();
                                 }
                             }

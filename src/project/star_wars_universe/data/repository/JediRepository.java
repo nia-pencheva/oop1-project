@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class JediRepository implements Repository<Jedi> {
     /**
-     * The instance of the singleton.
+     * The {@link JediRepository} instance.
      */
     private static JediRepository instance = null;
     /**
@@ -29,15 +29,15 @@ public class JediRepository implements Repository<Jedi> {
     private Set<Jedi> jedi = new HashSet<>();
 
     /**
-     * Initializes the class. This constructor is private in accordance to the rules
+     * Initializes the {@link JediRepository} instance. The constructor is private in accordance to the rules
      * for implementing the singleton pattern.
      */
     private JediRepository() {}
 
     /**
-     * Gets the {@link JediRepository} singleton instance. Here, the lazy loading approach is used - the
+     * Gets the {@link JediRepository} instance. Here, the lazy loading approach is used - the
      * singleton instance is only created when it is first accessed.
-     * @return the {@link JediRepository} singleton instance.
+     * @return the {@link JediRepository} instance.
      */
     public static JediRepository getInstance() {
         if(instance == null) {
@@ -48,21 +48,30 @@ public class JediRepository implements Repository<Jedi> {
     }
 
     /**
+     * Checks whether a jedi exists in the repository.
+     * @param item the {@link Jedi} whose existence is being checked for.
+     * @return a boolean value signifying whether the jedi exists in the repository.
+     */
+    public boolean jediExists(Jedi item) {
+        return jedi.contains(item);
+    }
+
+    /**
      * Gets a {@code List} of the {@link Jedi} entities in the repository. This method
      * does not return the {@link JediRepository#jedi} list directly, but instead
      * it returns a new {@code ArrayList} initialized with the values
      * of the {@link JediRepository#jedi} list so that it cannot be
      * directly manipulated from the outside.
-     * @return
+     * @return a {@code List} of the {@link Jedi} entities in the repository
      */
     public List<Jedi> getJedi() {
         return new ArrayList<>(jedi);
     }
 
     /**
-     * Gets a {@link Jedi} from the repository by a specified name.
+     * Gets a jedi from the repository by a specified name.
      * @param name the name of the jedi that is searched for.
-     * @return the {@link Jedi} that is found.
+     * @return the jedi that is found.
      * @throws JediDoesNotExistException if no jedi with the specified name exists in the repository.
      */
     public Jedi getJediByName(String name) throws JediDoesNotExistException {

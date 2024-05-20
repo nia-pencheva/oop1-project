@@ -90,7 +90,7 @@ public class Planet {
      * The current {@link Planet#jediPopulation} is added to a {@code TreeSet}
      * initialized with the specified comparator, which is then assigned
      * to the {@link Planet#jediPopulation} field.
-     * @param comparator
+     * @param comparator the comparator using which the {@link Planet#jediPopulation} should be sorted.
      */
     public void sortJediPopulation(Comparator<Jedi> comparator) {
         Set<Jedi> sortedJedi = new TreeSet<>(comparator);
@@ -99,8 +99,8 @@ public class Planet {
     }
 
     /**
-     * Generates a string which is appropriate for displaying the planet information.
-     * @return a string appropriate for displaying the planet information.
+     * Generates a string that is suitable for displaying the planet information.
+     * @return a string suitable for displaying the planet information.
      */
     @Override
     public String toString() {
@@ -109,11 +109,17 @@ public class Planet {
         builder.append("Planet Information:" + lineSeparator);
         builder.append("-------------------" + lineSeparator);
         builder.append("Name: " + name + lineSeparator);
-        builder.append("Jedi on this planet:");
 
-        for(Jedi jedi : jediPopulation) {
-            builder.append(lineSeparator);
-            builder.append("- " + jedi.getName());
+        if(jediPopulation.isEmpty()) {
+            builder.append("No jedi on this planet yet");
+        }
+        else {
+            builder.append(lineSeparator + "Jedi on this planet:");
+
+            for(Jedi jedi : jediPopulation) {
+                builder.append(lineSeparator + lineSeparator);
+                builder.append(jedi);
+            }
         }
 
         return builder.toString();
@@ -133,7 +139,7 @@ public class Planet {
     }
 
     /**
-     * Generates a hash code for the planet instance based on the planets's name.
+     * Generates a hash code for the planet instance based on the planet's name.
      * @return a hash code for the planet instance.
      */
     @Override

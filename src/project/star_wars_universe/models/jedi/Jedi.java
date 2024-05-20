@@ -37,12 +37,12 @@ public class Jedi {
     /**
      * Initializes the Jedi instance. The jedi name is validated and
      * set in the constructor itself (it doesn't have a setter because it's immutable),
-     * while the other fields are validated through their setter methods.
-     * @param name the jedi's name
-     * @param rank the jedi's rank
-     * @param age the jedi's age
-     * @param saberColor the jedi's saber color
-     * @param power the jedi's power
+     * while the other fields are validated and set through their setter methods.
+     * @param name the jedi's name.
+     * @param rank the jedi's rank.
+     * @param age the jedi's age.
+     * @param saberColor the jedi's saber color.
+     * @param power the jedi's power.
      * @throws InvalidRankException if the value for rank is invalid.
      * @throws InvalidAgeException if the value for age is invalid.
      * @throws InvalidSaberColorException if the value for saber color is invalid.
@@ -83,6 +83,7 @@ public class Jedi {
      */
     public void setRank(Rank rank) throws InvalidRankException {
         if(rank == null) {
+            System.out.println(this);
             throw new InvalidRankException();
         }
 
@@ -152,14 +153,14 @@ public class Jedi {
     }
 
     /**
-     * Promotes the jedi. First, the Rank instance corresponding to the next rank order is extracted.
-     * Then it checks whether the promotion multiplier is larger than 0. If it is, the jedi's power is
+     * Promotes the jedi. First, the {@link Rank} instance corresponding to the next rank order is extracted.
+     * Then it is checked whether the promotion multiplier is larger than 0. If it is, the jedi's power is
      * set to [current_power + (current_power * multiplier)] and the jedi's rank is set to the next
      * one in the hierarchy.
      * @param multiplier the multiplier by which the jedi should be promoted.
      * @throws InvalidPromotionMultiplierException if the promotion multiplier is less than or equal to 0.
      * @throws HighestRankReachedException if the highest rank is reached for the jedi.
-     * @throws InvalidPowerException if the power exceeds the allowed limits when it gets set to its new value.
+     * @throws InvalidPowerException if the jedi's power exceeds the allowed limits when it gets set to its new value.
      */
     public void promoteJedi(double multiplier) throws InvalidPromotionMultiplierException, HighestRankReachedException, InvalidPowerException {
         try {
@@ -178,14 +179,14 @@ public class Jedi {
     }
 
     /**
-     * Demotes the jedi. First, the Rank instance corresponding to the previous rank order is extracted.
-     * Then it checks whether the promotion multiplier is larger than 0. If it is, the jedi's power is set
+     * Demotes the jedi. First, the {@link Rank} instance corresponding to the previous rank order is extracted.
+     * Then it is checked whether the promotion multiplier is larger than 0. If it is, the jedi's power is set
      * to [current_power - (current_power * multiplier)] and the jedi's rank is set to the previous one
      * in the hierarchy.
      * @param multiplier the multiplier by which the jedi should be demoted.
      * @throws InvalidPromotionMultiplierException if the promotion multiplier is less than or equal to 0.
      * @throws LowestRankReachedException if the lowest rank is reached for the jedi.
-     * @throws InvalidPowerException if the power exceeds the allowed limits when it gets set to its new value.
+     * @throws InvalidPowerException if the jedi's power exceeds the allowed limits when it gets set to its new value.
      */
     public void demoteJedi(double multiplier) throws InvalidPromotionMultiplierException, LowestRankReachedException, InvalidPowerException {
         try {
@@ -204,8 +205,8 @@ public class Jedi {
     }
 
     /**
-     * Generates a string which is appropriate for displaying the jedi information.
-     * @return a string appropriate for displaying the jedi information.
+     * Generates a {@code String} that is suitable for displaying the jedi information.
+     * @return a {@code String} suitable for displaying the jedi information.
      */
     @Override
     public String toString() {

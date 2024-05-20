@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Provides the functionality to read the contents of a file specified by its path.
+ * Provides the functionality for reading the contents of a file specified by its path.
  */
 public class FileReader implements Reader {
     /**
@@ -16,7 +16,7 @@ public class FileReader implements Reader {
     private String path;
 
     /**
-     * Initializes a file reader with the path of the file that should be read.
+     * Initializes a {@link FileReader} instance with the path of the file that should be read.
      * @param path the path of the file that should be read.
      */
     public FileReader(String path) {
@@ -26,12 +26,12 @@ public class FileReader implements Reader {
     /**
      * Reads the contents of the file specified by {@link FileReader#path}.
      * A new {@link File} object is created using the specified {@link FileReader#path}.
-     * If the file specified does not exist, it is created.
+     * If the file does not exist, it is created.
      * Then, using a {@link BufferedReader} and the {@link java.io.FileReader} class
      * the content is read and appended to a {@link StringBuilder} instance.
      * When the reading process is finished, the input stream is closed
      * and the content is returned as a {@code String}.
-     * @return the content of the file.
+     * @return the content of the file specified by {@link FileReader#path}.
      * @throws IOException if an exception occurs while the file is being read.
      */
     @Override

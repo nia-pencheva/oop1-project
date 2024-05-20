@@ -3,7 +3,7 @@ package project.star_wars_universe.exceptions.planets;
 /**
  * Thrown when a {@link project.star_wars_universe.models.jedi.Jedi} is attempted to be added to
  * a {@link project.star_wars_universe.models.planets.Planet}'s {@link project.star_wars_universe.models.planets.Planet#jediPopulation}
- * when it already exists.
+ * when it already exists there.
  */
 public class JediExistsOnThisPlanetException extends Exception {
     /**

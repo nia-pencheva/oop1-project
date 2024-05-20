@@ -17,13 +17,13 @@ import java.util.List;
 
 /**
  * A singleton class that manages the application data and tracks the opened file.
- * This class is written using the singleton pattern, because there should only be one entity
- * that manages the application data - otherwise unexpected behaviours may occur (such as
+ * This class is implemented using the singleton pattern, because there should only be one instance
+ * of the class that manages the application data - otherwise unexpected behaviours may occur (such as
  * data loss).
  */
 public class AppDataManager {
     /**
-     * The instance of the singleton.
+     * The instance of the {@link AppDataManager}.
      */
     private static AppDataManager instance = null;
     /**
@@ -46,9 +46,9 @@ public class AppDataManager {
     private AppDataManager() {}
 
     /**
-     * Gets the {@link AppDataManager} singleton instance. Here, the lazy loading approach is
+     * Gets the {@link AppDataManager} instance. Here, the lazy loading approach is
      * used - the singleton instance is only created when it is first accessed.
-     * @return the {@link AppDataManager} singleton instance.
+     * @return the {@link AppDataManager} instance.
      */
     public static AppDataManager getInstance() {
         if(instance == null) {
@@ -97,7 +97,7 @@ public class AppDataManager {
      * Saves the application data to the specified file. First the {@code List}s of
      * {@link Jedi} and {@link Planet}s are retrieved from the {@link JediRepository} and the
      * {@link PlanetsRepository} respectively. Then they are used to create an {@link AppData}
-     * object. The object gets serialized using the {@link project.star_wars_universe.contracts.util.Serializer}
+     * object. The object is serialized using the {@link project.star_wars_universe.contracts.util.Serializer}
      * of the specified {@link File} and afterwards it is written to it.
      * @param file the file to which the application data should be written.
      * @throws SerializationFailureException if an exception occurs during the serialization of the applicaton data.

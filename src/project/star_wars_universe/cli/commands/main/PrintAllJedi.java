@@ -9,6 +9,11 @@ import project.star_wars_universe.models.jedi.Jedi;
 
 import java.util.List;
 
+/**
+ * The {@link Command} for printing all jedi. This command is not a part of the
+ * project's requirements, but I decided to add it because I felt that a user
+ * might want to see a list of all the jedi in the application.
+ */
 public class PrintAllJedi implements Command {
     /**
      * A reference to the {@link AppDataManager}.

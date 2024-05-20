@@ -7,7 +7,7 @@ import project.star_wars_universe.models.jedi.Jedi;
 import project.star_wars_universe.models.jedi.enums.Rank;
 import project.star_wars_universe.models.jedi.enums.SaberColor;
 import project.star_wars_universe.models.planets.Planet;
-import project.star_wars_universe.util.comparators.JediByAge;
+import project.star_wars_universe.util.comparators.JediByAgeAndName;
 import project.star_wars_universe.util.comparators.JediByName;
 import project.star_wars_universe.util.comparators.JediByStrength;
 
@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * Contains methods for processing and gathering information about
- * the characteristics of different sets of {@link Jedi}. It's methods are all
+ * the characteristics of different sets of {@link Jedi}. Its methods are all
  * static because they only look over some sets of data for which the class itself
  * does not need to be instantiated.
  */
@@ -39,21 +39,21 @@ public class JediStatisticsService {
      * {@link Collections#max(Collection)} method and a {@link JediByStrength} comparator.
      * @param planet the planet whose strongest jedi needs to be found.
      * @return the strongest jedi on the specified planet.
-     * @throws PlanetDoesNotExistException is the specified planet does not exist.
      */
-    public static Jedi getStrongestJediOnPlanet(Planet planet) throws PlanetDoesNotExistException {
+    public static Jedi getStrongestJediOnPlanet(Planet planet) {
         return Collections.max(planet.getJediPopulation(), new JediByStrength());
     }
 
     /**
-     * Gets the youngest jedi of a specified rank on a given planet. The {@link Planet#jediPopulation}
-     * is first filtered by the specified rank. If no jedi remain after the filtering, a {@link NoJediOfThisRankOnPlanetException}
-     * exception is thrown. Otherwise, the method gets the youngest jedi of the filtered ones using
-     * the {@link Collections#min(Collection)} method and a {@link JediByAge} comparator.
+     * Gets the youngest jedi of a specified rank on a given planet, and if there are more
+     * than one jedi of that rank with the same age, gets the first one by alphabetical order.
+     * The {@link Planet#jediPopulation} is first filtered by the specified rank. Then
+     * thhe method gets the youngest jedi of the filtered ones using
+     * the {@link Collections#min(Collection)} method and a {@link JediByAgeAndName} comparator.
      * @param rank the rank by which the search for the youngest jedi should be filtered.
      * @param planet the planet whose youngest jedi of a specified rank needs to be found.
      * @return the youngest jedi of a specified rank on the given planet.
-     * @throws NoJediOfThisRankOnPlanetException
+     * @throws NoJediOfThisRankOnPlanetException if no jedi of the specified rank exist on the given planet.
      */
     public static Jedi getYoungestJediOfRankOnPlanet(Rank rank, Planet planet) throws NoJediOfThisRankOnPlanetException {
         Set<Jedi> jediOfRank = new HashSet<>();
@@ -68,16 +68,15 @@ public class JediStatisticsService {
             throw new NoJediOfThisRankOnPlanetException();
         }
 
-        return Collections.min(jediOfRank, new JediByAge());
+        return Collections.min(jediOfRank, new JediByAgeAndName());
     }
 
     /**
      * Gets the most used saber color by at least one Grand Master on a specified planet. First, the {@link Planet#jediPopulation}
      * is iterated over in order to gather all the saber colors used by Grand Masters in a {@code saberColorsUsedByGrandMasters}
      * map where the key is the {@link SaberColor} and the value is the number of jedi using sabers of that color, which is initialy 0.
-     * If the map is empty after the loop, a {@link NoGrandMastersOnPlanetException} is thrown. Otherwise, the specified planet's
-     * population is once again iterated over. At each repetition it is checked whether the current jedi's saber color exists as a key
-     * in the {@code saberColorsUsedByGrandMasters} map and if yes the number of jedi using sabers of that color (the map corresponding value)
+     * Then, the specified planet's population is once again iterated over. At each repetition it is checked whether the current jedi's saber color exists as a key
+     * in the {@code saberColorsUsedByGrandMasters} map and if yes the number of jedi using a saber of that color (the corresponding value in the map)
      * is incremented. Lastly, using the {@link Collections#max(Collection)} method and passing to it the {@code saberColorsUsedByGrandMasters}'s
      * entry set retrieved using the {@link Map#entrySet()} method and the comparator retrieved using the {@link Map.Entry#comparingByValue()} method,
      * we get the key of the returned entry set instance, which is the wanted {@link SaberColor}.
@@ -114,16 +113,15 @@ public class JediStatisticsService {
     /**
      * Gets the most used saber color used by the jedi of a specified rank on a given planet.
      * First, the {@link Planet#jediPopulation} is iterated over in order to accumulate the numbers
-     * of jedi using different saber colors inside a {@code saberColorsUsedByRank} map
-     * where the key is the {@link SaberColor} and the value is the number of jedi using sabers of that color.
-     * If the map is empty after the loop, a {@link NoJediOfThisRankOnPlanetException} exception is thrown.
-     * Otherwise, using the {@link Collections#max(Collection)} method and passing to it the {@code saberColorsUsedByRank}'s
+     * of jedi of the specified rank using different saber colors inside a {@code saberColorsUsedByRank} map
+     * where the key is the {@link SaberColor} and the value is the number of jedi using a saber of that color.
+     * Then, using the {@link Collections#max(Collection)} method and passing to it the {@code saberColorsUsedByRank}'s
      * entry set retrieved using the {@link Map#entrySet()} method and the comparator retrieved using the {@link Map.Entry#comparingByValue()} method,
      * we get the key of the returned entry set instance, which is the wanted {@link SaberColor}.
      * @param rank the rank by which the search for the most used saber color should be filtered.
      * @param planet the planet whose jedi population should be searched over.
      * @return the most used saber color by the jedi of the specified rank on the given planet.
-     * @throws NoJediOfThisRankOnPlanetException
+     * @throws NoJediOfThisRankOnPlanetException if no jedi of the specified rank exist on the given planet.
      */
     public static SaberColor getMostUsedSaberColorOfRankOnPlanet(Rank rank, Planet planet) throws NoJediOfThisRankOnPlanetException {
         Map<SaberColor, Integer> saberColorsUsedByRank = new HashMap<>();

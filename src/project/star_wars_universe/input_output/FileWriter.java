@@ -5,7 +5,7 @@ import project.star_wars_universe.contracts.input_output.Writer;
 import java.io.IOException;
 
 /**
- * Provides the functionality to write content to a file specified by its path.
+ * Provides the functionality for writing content to a file specified by its path.
  */
 public class FileWriter implements Writer {
     /**
@@ -14,7 +14,7 @@ public class FileWriter implements Writer {
     private String path;
 
     /**
-     * Initializes the file writer with the path of the file that should be written to.
+     * Initializes a {@link FileWriter} instance with the path of the file that should be written to.
      * @param path the path of the file that should be written to.
      */
     public FileWriter(String path) {
@@ -24,7 +24,8 @@ public class FileWriter implements Writer {
     /**
      * Writes content to the file specified by {@link FileWriter#path}.
      * A {@link java.io.FileWriter} is instantiated using {@link FileWriter#path}
-     * and the specified content is written to the file. If there
+     * and the specified content is written to the file. If the file
+     * does not exist, it is created. If there
      * is any existing data in the file prior to this operation, it is overwritten.
      * When the writing is done, the output stream is closed.
      * @param content the content that should be written.
